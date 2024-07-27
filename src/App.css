@@ -2,6 +2,8 @@
     /* Colors */
     --dark-jungle-green: #141b25;
     --carrot-orange    : #ff8500;
+    --bluish-cyan      : #1caee3;
+    --iceberg-blue     : #E7EEFD;
 
     /* Base Font Size */
     font-size: 16px;
@@ -14,6 +16,10 @@ main {
     display        : flex;
     justify-content: center;
     width          : 100%;
+}
+
+p {
+    color: var(--dark-jungle-green);
 }
 
 .container {
@@ -70,7 +76,7 @@ header nav a.active {
 
 /* Sign in Button */
 
-header button#sign-in {
+button {
     align-items     : center;
     background-color: var(--carrot-orange);
     border          : 3px solid var(--carrot-orange);
@@ -88,7 +94,7 @@ header button#sign-in {
     width           : auto;
 }
 
-header button#sign-in:hover {
+button:hover {
     background-color: white;
     color           : var(--carrot-orange);
 }
@@ -96,7 +102,7 @@ header button#sign-in:hover {
 /* HOME Component */
 
 #home {
-    margin-top: 2em;
+    margin: 2em 0;
 }
 
 #home .container {
@@ -108,4 +114,64 @@ header button#sign-in:hover {
     margin-bottom: 1em;
     text-align   : center;
     width        : 100%;
+}
+
+/* PRODUCT Component */
+.product {
+    align-items   : center;
+    border-bottom : 1px solid var(--iceberg-blue);
+    display       : flex;
+    flex-direction: row;
+    padding       : 1.5em 0;
+}
+
+.product:first-child {
+    padding-top: 0;
+}
+
+.product:last-child {
+    border-bottom: 0;
+}
+
+.product .name {
+    cursor     : pointer;
+    font-size  : 1.2em;
+    font-weight: 600;
+    line-height: 1.25em;
+    text-align : justify;
+    transition : all ease-in-out .05s;
+}
+
+.product .name:hover {
+    color          : var(--bluish-cyan);
+    text-decoration: underline;
+}
+
+.product .product-info {
+    align-items    : center;
+    display        : flex;
+    flex-direction : row;
+    font-size      : 1.1em;
+    justify-content: space-between;
+}
+
+.product .currency-symbol,
+.product .fraction-part {
+    color    : var(--bluish-cyan);
+    font-size: 1em;
+    position : relative;
+    top      : -.25em;
+}
+
+.product .whole-part {
+    color      : var(--bluish-cyan);
+    font-size  : 1.75em;
+    font-weight: 400;
+    margin     : 0 .05em;
+    position   : relative;
+    top        : .1em;
+}
+
+.product button {
+    padding: .35em 1.75em;
 }
