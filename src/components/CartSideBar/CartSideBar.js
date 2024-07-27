@@ -66,6 +66,7 @@ const CartSideBar = () => {
           </td>
         </tr>
       </table>
+      <button>Proceed to Checkout</button>
     </aside>
   );
 };

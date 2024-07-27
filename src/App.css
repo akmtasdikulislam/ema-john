@@ -80,7 +80,7 @@ button {
     align-items     : center;
     background-color: var(--carrot-orange);
     border          : 3px solid var(--carrot-orange);
-    border-radius   : .5em;
+    border-radius   : .25em;
     color           : white;
     display         : flex;
     flex-direction  : row;
@@ -89,7 +89,7 @@ button {
     gap             : .75em;
     height          : auto;
     justify-content : center;
-    padding         : .45em 1.75em;
+    padding         : .35em 1.75em;
     transition      : all .2s ease-in-out;
     width           : auto;
 }
@@ -161,12 +161,12 @@ button:hover {
     color    : var(--bluish-cyan);
     font-size: 1em;
     position : relative;
-    top      : -.1em;
+    top      : -.175em;
 }
 
 .product .whole-part {
     color      : var(--bluish-cyan);
-    font-size  : 1.5em;
+    font-size  : 1.65em;
     font-weight: 400;
     margin     : 0 .05em;
     position   : relative;
@@ -174,7 +174,7 @@ button:hover {
 }
 
 .product button {
-    padding: .35em 1.75em;
+    padding: .25em 1.75em;
 }
 
 /* CARTSIDEBAR Component */
@@ -211,4 +211,10 @@ aside.cart {
 .cart .grand-total p {
     font-weight: 600;
     padding-top: .5em;
+}
+
+.cart button {
+    margin-top: 3em;
+    padding   : .35em 1.75em;
+    width     : 100%;
 }
