@@ -62,14 +62,19 @@ header nav a.active {
 /* Sign in Button */
 
 header button#sign-in {
+    align-items     : center;
     background-color: var(--carrot-orange);
     border          : 3px solid var(--carrot-orange);
     border-radius   : .5em;
     color           : white;
+    display         : flex;
+    flex-direction  : row;
     font-size       : 1.05em;
     font-weight     : 600;
+    gap             : .75em;
     height          : auto;
-    padding         : .45em 2em;
+    justify-content : center;
+    padding         : .45em 1.75em;
     transition      : all .2s ease-in-out;
     width           : auto;
 }

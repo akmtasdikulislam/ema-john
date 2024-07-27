@@ -1,3 +1,5 @@
+import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import logo from "../../assets/images/logo-inverted.png";
 
@@ -15,8 +17,12 @@ const Header = () => {
           <a href="/cart">Cart</a>
           <a href="/manage-inventory">Manage Inventory</a>
         </nav>
+
         {/* Sign in button and sign in status */}
-        <button id="sign-in">Sign in</button>
+        <button id="sign-in">
+          <FontAwesomeIcon icon={faArrowRightFromBracket} />
+          Sign in
+        </button>
       </div>
     </header>
   );
