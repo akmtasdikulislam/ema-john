@@ -8,20 +8,29 @@
 }
 
 /* Common Styles */
+header,
+main {
+    align-items    : center;
+    display        : flex;
+    justify-content: center;
+    width          : 100%;
+}
+
 .container {
     display: flex;
     width  : 80%;
 }
 
+/* Highlighted words within a sentence */
+.highlight {
+    color: var(--carrot-orange);
+}
+
 /* HEADER Component */
 
 header {
-    align-items     : center;
     background-color: var(--dark-jungle-green);
-    display         : flex;
     height          : 7rem;
-    justify-content : center;
-    width           : 100%;
 }
 
 header .container {
@@ -82,4 +91,21 @@ header button#sign-in {
 header button#sign-in:hover {
     background-color: white;
     color           : var(--carrot-orange);
+}
+
+/* HOME Component */
+
+#home {
+    margin-top: 2em;
+}
+
+#home .container {
+    flex-direction: column;
+}
+
+#home .container h1 {
+    font-weight  : 700;
+    margin-bottom: 1em;
+    text-align   : center;
+    width        : 100%;
 }
