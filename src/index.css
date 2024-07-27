@@ -2,15 +2,16 @@
 *,
 ::before,
 ::after {
-  padding    : 0;
-  margin     : 0;
   box-sizing : border-box;
-  font-family: "Alef", sans-serif;
+  font-family: "Athiti", sans-serif;
+  font-weight: 500;
+  margin     : 0;
+  padding    : 0;
 }
 
 body {
-  min-width       : 100vw;
-  min-height      : 100vh;
-  overflow-x      : hidden;
   background-color: white;
+  min-height      : 100vh;
+  min-width       : 100vw;
+  overflow-x      : hidden;
 }

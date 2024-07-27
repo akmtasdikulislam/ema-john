@@ -1,0 +1,80 @@
+:root {
+    /* Colors */
+    --dark-jungle-green: #141b25;
+    --carrot-orange    : #ff8500;
+
+    /* Base Font Size */
+    font-size: 16px;
+}
+
+/* Common Styles */
+.container {
+    display: flex;
+    width  : 80%;
+}
+
+/* HEADER Component */
+
+header {
+    align-items     : center;
+    background-color: var(--dark-jungle-green);
+    display         : flex;
+    height          : 7rem;
+    justify-content : center;
+    width           : 100%;
+}
+
+header .container {
+    align-items    : center;
+    flex-direction : row;
+    justify-content: space-between;
+}
+
+header .logo {
+    width: 10rem;
+}
+
+/* Navbar */
+header nav {
+    align-items    : center;
+    display        : flex;
+    flex-direction : row;
+    gap            : 3.5em;
+    justify-content: center;
+}
+
+header nav a {
+    color          : white;
+    font-size      : 1.25em;
+    font-weight    : 600;
+    text-decoration: none;
+    transition     : all ease-in-out .3s;
+}
+
+header nav a:hover {
+    color: var(--carrot-orange);
+}
+
+header nav a.active {
+    color: var(--carrot-orange);
+}
+
+/* Sign in Button */
+
+header button#sign-in {
+    background-color: var(--carrot-orange);
+    border          : 3px solid var(--carrot-orange);
+    border-radius   : .5em;
+    color           : white;
+    font-size       : 1.05em;
+    font-weight     : 600;
+    height          : auto;
+    padding         : .45em 2em;
+    transition      : all .2s ease-in-out;
+    width           : auto;
+}
+
+header button#sign-in:hover {
+    background-color: white;
+    color           : var(--carrot-orange);
+}
