@@ -232,7 +232,7 @@ aside.cart-side-bar {
     padding-right: .5em;
 }
 
-.cart-side-bar-side-bar .grand-total {
+.cart-side-bar .grand-total {
     border-top: 2px solid var(--dark-jungle-green);
     font-size : 1.2em;
     margin-top: 1.5em;

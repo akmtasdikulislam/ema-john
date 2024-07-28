@@ -1,6 +1,7 @@
 import { faShoppingCart, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../../App";
 
 const Product = ({ productDetails }) => {
   // Destructuring product properties.
@@ -35,6 +36,9 @@ const Product = ({ productDetails }) => {
     return stars;
   };
 
+  // Accessing {cart and setCart} using context api
+  const { cart, setCart } = useContext(UserContext);
+
   return (
     <div className="product row">
       <div className="col-3">
@@ -48,7 +52,7 @@ const Product = ({ productDetails }) => {
               <td className="col-5">
                 <p>
                   Price: <span className="currency-symbol">$</span>
-                  <span className="whole-part">{price}</span>
+                  <span className="whole-part">{parseInt(price)}</span>
                   <span className="fraction-part">{priceFraction}</span>
                 </p>
               </td>
@@ -63,12 +67,14 @@ const Product = ({ productDetails }) => {
                         ratingStarType == "filled" ? (
                           // If the ratingStarType is "filled" then a "filled" star is rendered.
                           <FontAwesomeIcon
+                            key={ratingStarType + Math.random() * 99}
                             className="filled-stars"
                             icon={faStar}
                           />
                         ) : (
                           // Else if the ratingStarType is "empty" then a "empty" star is rendered.
                           <FontAwesomeIcon
+                            key={ratingStarType + Math.random() * 99}
                             className="empty-stars"
                             icon={faStar}
                           />
@@ -97,7 +103,12 @@ const Product = ({ productDetails }) => {
             </tr>
           </tbody>
         </table>
-        <button>
+        <button
+          onClick={
+            () => setCart([...cart, productDetails])
+            // when "Add to cart" button is clicked, it inserts the product object into cart (array). By using spread operator (...cart), inserting new item without removing other products in cart.
+          }
+        >
           <FontAwesomeIcon icon={faShoppingCart} />
           Add to cart
         </button>
