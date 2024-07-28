@@ -1,8 +1,9 @@
 :root {
     /* Colors */
-    --dark-jungle-green: #141b25;
-    --carrot-orange    : #ff8500;
+    --alert-color      : #ff1111;
     --bluish-cyan      : #1caee3;
+    --carrot-orange    : #ff8500;
+    --dark-jungle-green: #141b25;
     --iceberg-blue     : #E7EEFD;
 
     /* Base Font Size */
@@ -22,6 +23,12 @@ p {
     color: var(--dark-jungle-green);
 }
 
+table {
+    border-collapse: collapse;
+    border-spacing : 0;
+    width          : 100%;
+}
+
 .container {
     display: flex;
     width  : 80%;
@@ -29,7 +36,8 @@ p {
 
 /* Highlighted words within a sentence */
 .highlight {
-    color: var(--carrot-orange);
+    color      : var(--alert-color);
+    font-weight: 600;
 }
 
 /* HEADER Component */
@@ -148,12 +156,40 @@ button:hover {
     text-decoration: underline;
 }
 
-.product .product-info {
-    align-items    : center;
-    display        : flex;
-    flex-direction : row;
-    font-size      : 1.1em;
-    justify-content: space-between;
+.product table.product-info {
+    font-size : 1.1em;
+    margin-top: .5em;
+}
+
+.product .product-info td {
+    align-items: center;
+    display    : flex;
+    height     : 2.5em;
+}
+
+/* Product Rating */
+.rating {
+    display       : flex;
+    flex-direction: row;
+}
+
+.rating-stars {
+    align-items   : center;
+    display       : flex;
+    flex-direction: row;
+    font-size     : 1em;
+    margin-left   : .25em;
+    margin-right  : .5em;
+    position      : relative;
+    top           : -.1em;
+}
+
+.filled-stars {
+    color: var(--carrot-orange);
+}
+
+.empty-stars {
+    color: var(--iceberg-blue);
 }
 
 .product .currency-symbol,
@@ -178,42 +214,36 @@ button:hover {
 }
 
 /* CARTSIDEBAR Component */
-aside.cart {
+aside.cart-side-bar {
     background-color: var(--iceberg-blue);
     padding         : 2.5em 1.5em;
 }
 
-.cart h5 {
+.cart-side-bar h5 {
     align-items   : center;
     display       : flex;
     flex-direction: row;
-    font-weight   : 600;
+    font-weight   : 700;
     gap           : .35em;
     margin-bottom : 1.5em;
 }
 
-.cart table {
-    border-collapse: collapse;
-    border-spacing : 0;
-    width          : 100%;
-}
-
-.cart table tr td:nth-child(2) {
+.cart-side-bar table tr td:nth-child(2) {
     padding-right: .5em;
 }
 
-.cart .grand-total {
+.cart-side-bar-side-bar .grand-total {
     border-top: 2px solid var(--dark-jungle-green);
     font-size : 1.2em;
     margin-top: 1.5em;
 }
 
-.cart .grand-total p {
+.cart-side-bar .grand-total p {
     font-weight: 600;
     padding-top: .5em;
 }
 
-.cart button {
+.cart-side-bar button {
     margin-top: 3em;
     padding   : .35em 1.75em;
     width     : 100%;
