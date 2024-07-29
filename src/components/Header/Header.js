@@ -1,6 +1,7 @@
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { NavLink } from "react-router-dom";
 import logo from "../../assets/images/logo-inverted.png";
 
 const Header = () => {
@@ -11,11 +12,9 @@ const Header = () => {
         <img className="logo" src={logo} alt="ema-john Logo" />
         {/* Navbar */}
         <nav>
-          <a href="/" className="active">
-            Home
-          </a>
-          <a href="/cart">Cart</a>
-          <a href="/manage-inventory">Manage Inventory</a>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/cart">Cart</NavLink>
+          <NavLink to="/manage-inventory">Manage Inventory</NavLink>
         </nav>
 
         {/* Sign in button and sign in status */}

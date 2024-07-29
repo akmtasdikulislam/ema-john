@@ -1,7 +1,7 @@
 import React from "react";
 import fakeData from "../../assets/fakeData";
-import CartSideBar from "../CartSideBar/CartSideBar";
-import Product from "../Product/Product";
+import CartSideBar from "../../components/CartSideBar/CartSideBar";
+import Product from "../../components/Product/Product";
 
 const Home = () => {
   const products = fakeData.slice(0, 9);
