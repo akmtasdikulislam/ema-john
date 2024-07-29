@@ -25,10 +25,10 @@ const CartSideBar = () => {
     // When a new product is inserted, then .map() is run on the cart to calculate shopping cost.
 
     // Destructuring product's price and shipping cost.
-    const { price, shipping } = product;
+    const { price, quantity, shipping } = product;
 
     // Calculating total marchendise cost.
-    marchendise = marchendise + price;
+    marchendise = marchendise + price * quantity;
 
     // Calculating total shippingAndHandeling cost.
     shippingAndHandeling = shippingAndHandeling + shipping;

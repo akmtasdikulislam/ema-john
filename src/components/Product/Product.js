@@ -5,7 +5,7 @@ import { UserContext } from "../../App";
 
 const Product = ({ productDetails }) => {
   // Destructuring product properties.
-  const { name, img, price, priceFraction, star, starCount, seller } =
+  const { key, name, img, price, priceFraction, star, starCount, seller } =
     productDetails;
 
   // Converting single digit numbers into double digit numbers (it means, from 1-9 all single digit numbers will have a zero in front of them. Like: 01, 02 ... etc.)
@@ -38,6 +38,21 @@ const Product = ({ productDetails }) => {
 
   // Accessing {cart and setCart} using context api
   const { cart, setCart } = useContext(UserContext);
+
+  // Add product to cart
+  const addToCart = () => {
+    // Finding whether cart already has same product or not
+    // eslint-disable-next-line eqeqeq
+    const sameProduct = cart.find((product) => key == product.key);
+
+    if (sameProduct) {
+      productDetails.quantity = productDetails.quantity + 1;
+    } else {
+      productDetails.quantity = 1;
+      setCart([...cart, productDetails]);
+    }
+    console.log({ cart, productDetails });
+  };
 
   return (
     <div className="product row">
@@ -105,7 +120,9 @@ const Product = ({ productDetails }) => {
         </table>
         <button
           onClick={
-            () => setCart([...cart, productDetails])
+            () => {
+              addToCart();
+            }
             // when "Add to cart" button is clicked, it inserts the product object into cart (array). By using spread operator (...cart), inserting new item without removing other products in cart.
           }
         >
