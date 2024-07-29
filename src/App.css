@@ -109,15 +109,15 @@ button:hover {
 
 /* HOME Component */
 
-#home {
+main {
     margin: 2em 0;
 }
 
-#home .container {
+main .container {
     flex-direction: column;
 }
 
-#home .container h1 {
+main .container h1 {
     font-weight  : 700;
     margin-bottom: 1em;
     text-align   : center;

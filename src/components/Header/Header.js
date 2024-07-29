@@ -14,7 +14,7 @@ const Header = () => {
         <nav>
           <NavLink to="/">Home</NavLink>
           <NavLink to="/cart">Cart</NavLink>
-          <NavLink to="/manage-inventory">Manage Inventory</NavLink>
+          <NavLink to="/inventory">Manage Inventory</NavLink>
         </nav>
 
         {/* Sign in button and sign in status */}

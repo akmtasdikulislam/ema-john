@@ -2,9 +2,11 @@ import React from "react";
 
 const Inventory = () => {
   return (
-    <div className="mt-5">
-      <h1>This is Inventory page</h1>
-    </div>
+    <main id="inventory">
+      <div className="container">
+        <h1>This is Inventory page</h1>
+      </div>
+    </main>
   );
 };
 

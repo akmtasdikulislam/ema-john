@@ -12,7 +12,11 @@ const Home = () => {
         <div className="row">
           <div className="col-9">
             {products.map((product) => (
-              <Product key={product.key} productDetails={product} />
+              <Product
+                key={product.key}
+                productDetails={product}
+                parent={"home"}
+              />
             ))}
           </div>
           <div className="col-3">
