@@ -6,6 +6,7 @@ import Cart from "./Pages/Cart/Cart";
 import Home from "./Pages/Home/Home";
 import Inventory from "./Pages/Inventory/Inventory";
 import NotFound from "./Pages/NotFound/NotFound";
+import ProductDetails from "./Pages/ProductDetails/ProductDetails";
 
 // Creating a context api named "UserContext" which will contain currently active user's login informations and cart history.
 export const UserContext = createContext();
@@ -20,6 +21,10 @@ function App() {
           <Route exact path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/inventory" element={<Inventory />} />
+          <Route
+            path="/details/product/:productKey"
+            element={<ProductDetails />}
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
