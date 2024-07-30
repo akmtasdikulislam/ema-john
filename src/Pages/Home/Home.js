@@ -1,6 +1,6 @@
 import React from "react";
 import fakeData from "../../assets/fakeData";
-import CartSideBar from "../../components/CartSideBar/CartSideBar";
+import Cart from "../../components/Cart/Cart";
 import Product from "../../components/Product/Product";
 
 const Home = () => {
@@ -20,7 +20,7 @@ const Home = () => {
             ))}
           </div>
           <div className="col-3">
-            <CartSideBar />
+            <Cart />
           </div>
         </div>
       </div>

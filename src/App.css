@@ -217,13 +217,13 @@ main .container h1 {
     padding: .25em 1.75em;
 }
 
-/* CARTSIDEBAR Component */
-aside.cart-side-bar {
+/* CART Component */
+aside.cart {
     background-color: var(--iceberg-blue);
     padding         : 2.5em 1.5em;
 }
 
-.cart-side-bar h5 {
+.cart h5 {
     align-items   : center;
     display       : flex;
     flex-direction: row;
@@ -232,22 +232,22 @@ aside.cart-side-bar {
     margin-bottom : 1.5em;
 }
 
-.cart-side-bar table tr td:nth-child(2) {
+.cart table tr td:nth-child(2) {
     padding-right: .5em;
 }
 
-.cart-side-bar .grand-total {
+.cart .grand-total {
     border-top: 2px solid var(--dark-jungle-green);
     font-size : 1.2em;
     margin-top: 1.5em;
 }
 
-.cart-side-bar .grand-total p {
+.cart .grand-total p {
     font-weight: 600;
     padding-top: .5em;
 }
 
-.cart-side-bar button {
+.cart button {
     margin-top: 3em;
     padding   : .35em 1.75em;
     width     : 100%;

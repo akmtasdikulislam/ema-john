@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../App";
+import { addToDatabaseCart } from "../../assets/utilities/databaseManager";
 
 // A function to show rating stars depending on their rating numbers.
 export const showRatingStars = (star) => {
@@ -43,11 +44,15 @@ const addToCart = (cart, setCart, productDetails, quantityAmount) => {
     );
     // Then overriding the cart by adding other products and quantity updated same product. Here using spead operator (...) to copy all items from otherProductsInCart array to a new Array which will also have the quantity updated same product.
     setCart([...otherProductsInCart, productDetails]);
+    // Also saving newly added product to browser's localStorage in order to make the cart persistent so that even after reloading the page, cart won't lost.
+    addToDatabaseCart(productDetails.key, productDetails.quantity);
   } else {
     // And if the product is added for the first time, then add a new "quantity" key to it with the value set to 1.
     productDetails.quantity = quantityAmount ? quantityAmount : 1;
     // Then make a new cart array containing old cart items by copying them using spread operator and newly added prodcut.
     setCart([...cart, productDetails]);
+    // Also saving newly added product to browser's localStorage in order to make the cart persistent so that even after reloading the page, cart won't lost.
+    addToDatabaseCart(productDetails.key, productDetails.quantity);
   }
 };
 

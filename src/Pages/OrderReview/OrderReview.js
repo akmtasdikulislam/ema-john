@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { UserContext } from "../../App";
-import CartSideBar from "../../components/CartSideBar/CartSideBar";
+import Cart from "../../components/Cart/Cart";
 import Product from "../../components/Product/Product";
 
-const Cart = () => {
+const OrderReview = () => {
   document.title = "Cart Review | Ema John";
   const { cart } = useContext(UserContext);
   return (
@@ -21,7 +21,7 @@ const Cart = () => {
             ))}
           </div>
           <div className="col-3">
-            <CartSideBar />
+            <Cart />
           </div>
         </div>
       </div>
@@ -29,4 +29,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default OrderReview;

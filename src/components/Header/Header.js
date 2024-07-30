@@ -13,7 +13,7 @@ const Header = () => {
         {/* Navbar */}
         <nav>
           <NavLink to="/">Home</NavLink>
-          <NavLink to="/cart">Cart</NavLink>
+          <NavLink to="/order/review">Order Review</NavLink>
           <NavLink to="/inventory">Manage Inventory</NavLink>
         </nav>
 

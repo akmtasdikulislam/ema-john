@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext } from "react";
 import { UserContext } from "../../App";
 
-const CartSideBar = () => {
+const Cart = () => {
   // eslint-disable-next-line no-unused-vars
   const { cart } = useContext(UserContext); // Accesing cart state from context-api
 
@@ -55,7 +55,7 @@ const CartSideBar = () => {
     grandTotal = subTotal + vatAndTax;
   });
   return (
-    <aside className="cart-side-bar">
+    <aside className="cart">
       <h5>
         <FontAwesomeIcon className="icon" icon={faShoppingCart} />
         Cart Summary
@@ -135,4 +135,4 @@ const CartSideBar = () => {
   );
 };
 
-export default CartSideBar;
+export default Cart;
