@@ -1,3 +1,5 @@
+import { faCircleCheck } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Link } from "react-router-dom";
 import google from "../../assets/images/google.svg";
@@ -41,7 +43,14 @@ const Login = () => {
               />
               <label htmlFor="password">Password</label>
             </fieldset>
-            <a href="/forgot-password">Forgot Password ?</a>
+            <div className="additional-form-items">
+              <fieldset>
+                <input type="checkbox" name="remember-me" id="remember-me" />
+                <FontAwesomeIcon className="icon" icon={faCircleCheck} />
+                <label htmlFor="remember-me">Remember Me</label>
+              </fieldset>
+              <a href="/forgot-password">Forgot Password ?</a>
+            </div>
           </form>
           <button className="login-button">Login</button>
           <p>Or</p>

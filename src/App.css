@@ -4,7 +4,7 @@
     --bluish-cyan      : #1caee3;
     --carrot-orange    : #ff8500;
     --dark-jungle-green: #141b25;
-    --deep-bluish-cyan : #00bbff;
+    --deep-bluish-cyan : #00b4f5;
     --iceberg-blue     : #E7EEFD;
 
     /* Base Font Size */
@@ -552,6 +552,59 @@ fieldset {
 
 .login-form-container a:hover {
     text-decoration: underline;
+}
+
+.additional-form-items {
+    display        : flex;
+    flex-direction : row;
+    justify-content: space-between;
+    margin         : 0;
+    padding        : 0;
+    width          : 100%;
+}
+
+.additional-form-items fieldset {
+    align-items        : center;
+    flex-direction     : row;
+    gap                : .4em;
+    margin             : 0;
+    position           : relative;
+    /* Prevent user from selecting */
+    -moz-user-select   : none;
+    -ms-user-select    : none;
+    -webkit-user-select: none;
+    user-select        : none;
+}
+
+.additional-form-items fieldset:hover label {
+    color     : hsl(221, 45%, 55%);
+    transition: all ease-in-out .1s;
+}
+
+.additional-form-items fieldset label {
+    color      : hsl(221, 45%, 70%);
+    cursor     : pointer;
+    font-weight: 500;
+}
+
+.additional-form-items fieldset #remember-me {
+    cursor : pointer;
+    height : 1.15em;
+    margin : 0;
+    opacity: 0;
+    padding: 0;
+    width  : 1.15em;
+    z-index: 9;
+}
+
+.additional-form-items fieldset #remember-me~.icon {
+    color    : hsl(221, 45%, 85%);
+    font-size: 1.25em;
+    position : absolute;
+}
+
+.additional-form-items fieldset #remember-me:checked~.icon {
+    color: var(--carrot-orange);
 }
 
 .login-form-container button {
