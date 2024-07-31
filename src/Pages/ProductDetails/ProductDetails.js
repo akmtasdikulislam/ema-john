@@ -21,6 +21,7 @@ import stripe from "../../assets/images/cards/stripe.svg";
 import visa from "../../assets/images/cards/visa.svg";
 import CustomerReview from "../../components/CustomerReview/CustomerReview";
 import { addToCart, showRatingStars } from "../../components/Product/Product";
+import Header from "../../components/Header/Header";
 
 const ProductDetails = () => {
   const { productKey } = useParams();
@@ -60,6 +61,7 @@ const ProductDetails = () => {
 
   return (
     <main id="product-details">
+      <Header />
       <div className="container">
         <div className="product">
           <div className="col-6">

@@ -3,9 +3,9 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import fakeData from "./assets/fakeData";
 import { getDatabaseCart } from "./assets/utilities/databaseManager";
-import Header from "./components/Header/Header";
 import Home from "./Pages/Home/Home";
 import Inventory from "./Pages/Inventory/Inventory";
+import Login from "./Pages/Login/Login";
 import NotFound from "./Pages/NotFound/NotFound";
 import OrderReview from "./Pages/OrderReview/OrderReview";
 import ProductDetails from "./Pages/ProductDetails/ProductDetails";
@@ -30,7 +30,6 @@ function App() {
   return (
     <UserContext.Provider value={{ cart, setCart }}>
       <div className="App">
-        <Header />
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/order/review" element={<OrderReview />} />
@@ -39,6 +38,7 @@ function App() {
             path="/details/product/:productKey"
             element={<ProductDetails />}
           />
+          <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
