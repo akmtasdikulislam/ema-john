@@ -1,4 +1,3 @@
-import { faCircleCheck } from "@fortawesome/free-regular-svg-icons";
 import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
@@ -6,13 +5,14 @@ import { Link } from "react-router-dom";
 import google from "../../assets/images/google.svg";
 import logo from "../../assets/images/logo.png";
 
-const Login = () => {
-  document.title = "Login | Ema John";
+const SignUp = () => {
+  document.title = "Sign up | Ema John";
+
   return (
-    <main id="login" className="row">
+    <main id="sign-up" className="row">
       <div className="col-6" id="photo-column">
         <img
-          src="https://images.unsplash.com/photo-1508957454729-17eb89cd4b67?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          src="https://images.unsplash.com/photo-1577587230708-187fdbef4d91?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt=""
         />
       </div>
@@ -25,9 +25,18 @@ const Login = () => {
             <img src={logo} alt="Ema John" className="logo" />
           </Link>
 
-          <h3>Login</h3>
-          <p>Welcome back! We're so happy to have you back</p>
+          <h3>Sign up</h3>
+          <p>Experience Shopping Like Never Before!</p>
           <form>
+            <fieldset>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                placeholder="Enter your full name"
+              />
+              <label htmlFor="name">Fullname</label>
+            </fieldset>
             <fieldset>
               <input
                 type="email"
@@ -46,22 +55,14 @@ const Login = () => {
               />
               <label htmlFor="password">Password</label>
             </fieldset>
-            <div className="additional-form-items">
-              <fieldset>
-                <input type="checkbox" name="remember-me" id="remember-me" />
-                <FontAwesomeIcon className="icon" icon={faCircleCheck} />
-                <label htmlFor="remember-me">Remember Me</label>
-              </fieldset>
-              <a href="/forgot-password">Forgot Password ?</a>
-            </div>
           </form>
-          <button>Login</button>
+          <button>Sign up</button>
           <p className="or-text">Or</p>
           <button className="google-button">
-            <img src={google} alt="Google" /> Log in with Google
+            <img src={google} alt="Google" /> Sign up with Google
           </button>
           <p>
-            Don't have an account? <Link to="/sign-up">Sign up</Link>
+            Already have an account? <Link to="/login">Login</Link>
           </p>
         </div>
       </div>
@@ -69,4 +70,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;

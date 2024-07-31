@@ -470,27 +470,52 @@ input[type=number]::-webkit-outer-spin-button {
     width          : 100%;
 }
 
-/* Login Page */
+/* Login & Sign up Page */
 
-#login {
+#login,
+#sign-up {
     flex-direction: row;
     height        : 100%;
     width         : 100%;
 }
 
-#login.row {
+#login.row,
+#sign-up.row {
     margin : 0;
     padding: 0;
     width  : 100%;
 }
 
-#login-form-column {
+#form-column {
     align-items    : center;
     display        : flex;
     justify-content: center;
 }
 
-#login-photo-column {
+#form-column .back {
+    align-items          : center;
+    color                : var(--dark-jungle-green);
+    cursor               : pointer;
+    display              : flex;
+    flex-direction       : row;
+    gap                  : .5em;
+    position             : absolute;
+    right                : 5em;
+    text-decoration-color: white;
+    top                  : 5em;
+}
+
+#form-column .back:hover {
+    text-decoration      : underline;
+    text-decoration-color: var(--carrot-orange);
+}
+
+#form-column .back:hover svg {
+    color     : var(--carrot-orange);
+    transition: all ease-in-out .2s;
+}
+
+#photo-column {
     height    : 100vh;
     margin    : 0;
     object-fit: fill;
@@ -499,23 +524,23 @@ input[type=number]::-webkit-outer-spin-button {
     width     : 50%;
 }
 
-#login-photo {
+#photo-column img {
     height: 100%;
 }
 
-.login-form-container {
+.form-container {
     height: auto;
     width : 25em;
 }
 
-.login-form-container .logo {
+.form-container .logo {
     height       : auto;
     margin-bottom: 2.5em;
     transform    : translateX(50%);
     width        : 12em;
 }
 
-.login-form {
+.form-container form {
     margin: 1.5em 0;
 }
 
@@ -525,7 +550,7 @@ fieldset {
     margin-bottom : 1em;
 }
 
-.login-form input {
+.form-container form input {
     border       : 2px solid var(--iceberg-blue);
     border-radius: .25em;
     height       : 2.5em;
@@ -536,24 +561,25 @@ fieldset {
     width        : 100%;
 }
 
-.login-form input:focus-within {
+.form-container form input:focus-within {
     border-color: var(--deep-bluish-cyan);
 }
 
-.login-form input:focus-within+label {
+.form-container form input:focus-within+label {
     color      : var(--deep-bluish-cyan);
     font-weight: 600;
 }
 
-.login-form-container a {
+.form-container a {
     color          : var(--deep-bluish-cyan);
     text-decoration: none;
 }
 
-.login-form-container a:hover {
+.form-container a:hover {
     text-decoration: underline;
 }
 
+/* Remember me checkbox and Forgot password link on Login page.  */
 .additional-form-items {
     display        : flex;
     flex-direction : row;
@@ -607,34 +633,35 @@ fieldset {
     color: var(--carrot-orange);
 }
 
-.login-form-container button {
+.form-container button {
     width: 100%;
 }
 
-.login-button+p {
+.or-text {
     /* Text "or" between two buttons */
     color     : hsl(221, 85%, 75%);
     margin    : .75em 0;
     text-align: center;
 }
 
-.login-with-google-button {
+/* Login / Sign up with Google Button */
+.google-button {
     background-color: white;
     border-color    : var(--iceberg-blue);
     border-width    : 2px;
     color           : var(--dark-jungle-green);
-    margin-bottom   : .5em;
+    margin-bottom   : .75em;
     padding         : .5em;
 }
 
-.login-with-google-button:hover {
+.google-button:hover {
     color: var(--deep-bluish-cyan);
 }
 
-.login-with-google-button img {
+.google-button img {
     width: 1.4em;
 }
 
-.login-with-google-button+p {
+.google-button+p {
     margin: 0;
 }

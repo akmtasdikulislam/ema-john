@@ -9,6 +9,7 @@ import Login from "./Pages/Login/Login";
 import NotFound from "./Pages/NotFound/NotFound";
 import OrderReview from "./Pages/OrderReview/OrderReview";
 import ProductDetails from "./Pages/ProductDetails/ProductDetails";
+import SignUp from "./Pages/SignUp/SignUp";
 
 // Creating a context api named "UserContext" which will contain currently active user's login informations and cart history.
 export const UserContext = createContext();
@@ -39,6 +40,7 @@ function App() {
             element={<ProductDetails />}
           />
           <Route path="/login" element={<Login />} />
+          <Route path="/sign-up" element={<SignUp />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
