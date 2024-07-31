@@ -6,6 +6,7 @@ import Product from "../../components/Product/Product";
 
 const Home = () => {
   const products = fakeData.slice(0, 9);
+  document.title = "Home | Ema John";
   return (
     <main id="home">
       <Header />

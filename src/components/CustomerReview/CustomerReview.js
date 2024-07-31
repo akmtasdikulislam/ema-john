@@ -37,7 +37,7 @@ const CustomerReview = () => {
               )}
               <span className="ms-3">4/5</span>
             </p>
-            <p>3 days ago</p>
+            <p className="date">3 days ago</p>
           </div>
         </div>
       </div>

@@ -1,8 +1,7 @@
-import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import logo from "../../assets/images/logo-inverted.png";
+import UserNav from "../UserNav/UserNav";
 
 const Header = () => {
   return (
@@ -18,12 +17,13 @@ const Header = () => {
         </nav>
 
         {/* Sign in button and sign in status */}
-        <Link className="link" to={"/login"}>
+        {/* <Link className="link" to={"/login"}>
           <button id="sign-in">
             <FontAwesomeIcon icon={faArrowRightFromBracket} />
             Sign in
           </button>
-        </Link>
+        </Link> */}
+        <UserNav />
       </div>
     </header>
   );

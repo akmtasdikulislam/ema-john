@@ -470,6 +470,10 @@ input[type=number]::-webkit-outer-spin-button {
     width          : 100%;
 }
 
+.customer-review .rating .date {
+    color: hsl(221, 45%, 70%);
+}
+
 /* Login & Sign up Page */
 
 #login,
@@ -664,4 +668,56 @@ fieldset {
 
 .google-button+p {
     margin: 0;
+}
+
+/* UserNav component */
+.user-nav {
+    align-items   : center;
+    color         : white;
+    display       : flex;
+    flex-direction: row;
+    gap           : .25em;
+    width         : max-content;
+}
+
+.user-nav .user-photo {
+    border-radius: 50%;
+    height       : 2.75em;
+    object-fit   : fill;
+    overflow     : hidden;
+    padding      : 0;
+    width        : 2.75em;
+}
+
+.user-nav .user-photo img {
+    height: auto;
+    width : 100%;
+}
+
+.user-nav .name {
+    color : white;
+    margin: 0;
+    width : max-content;
+}
+
+.user-nav .name span {
+    font-size  : 1.09em;
+    font-weight: 600;
+}
+
+.user-nav #log-out {
+    background-color     : transparent;
+    border               : 0;
+    cursor               : pointer;
+    gap                  : .4em;
+    margin               : 0;
+    padding              : 0;
+    text-decoration      : underline;
+    text-decoration-color: var(--carrot-orange);
+}
+
+.user-nav #log-out .icon {
+    /* Flip arrow in icon to make it indicate logout icon 😉  */
+    -webkit-transform: scaleX(-1);
+    transform        : scaleX(-1);
 }
