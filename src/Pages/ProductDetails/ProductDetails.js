@@ -20,8 +20,8 @@ import payPal from "../../assets/images/cards/paypal.svg";
 import stripe from "../../assets/images/cards/stripe.svg";
 import visa from "../../assets/images/cards/visa.svg";
 import CustomerReview from "../../components/CustomerReview/CustomerReview";
-import { addToCart, showRatingStars } from "../../components/Product/Product";
 import Header from "../../components/Header/Header";
+import { addToCart, showRatingStars } from "../../components/Product/Product";
 
 const ProductDetails = () => {
   const { productKey } = useParams();
@@ -45,6 +45,7 @@ const ProductDetails = () => {
     shipping,
     features,
   } = product;
+  console.log(product);
 
   document.title = `${name} | Ema John`;
 

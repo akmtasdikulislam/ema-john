@@ -422,7 +422,8 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 /* OrderReview Page */
-#order-review .empty-cart {
+#order-review .empty-cart,
+#no-features-message {
     width          : 100%;
     height         : 100%;
     display        : flex;
@@ -433,12 +434,14 @@ input[type=number]::-webkit-outer-spin-button {
     color          : hsl(221, 45%, 85%);
 }
 
-#order-review .empty-cart .icon {
+#order-review .empty-cart .icon,
+#no-features-message .icon {
     font-size    : 2.75em;
     margin-bottom: .25em;
 }
 
-#order-review .empty-cart p {
+#order-review .empty-cart p,
+#no-features-message p {
     color      : hsl(221, 45%, 85%);
     font-weight: 600;
     margin     : 0;
@@ -577,7 +580,8 @@ fieldset {
     margin-bottom : 1em;
 }
 
-.form-container form input {
+form input,
+form select {
     border       : 2px solid var(--iceberg-blue);
     border-radius: .25em;
     height       : 2.5em;
@@ -588,11 +592,13 @@ fieldset {
     width        : 100%;
 }
 
-.form-container form input:focus-within {
+form input:focus-within,
+form select:focus-within {
     border-color: var(--deep-bluish-cyan);
 }
 
-.form-container form input:focus-within+label {
+form input:focus-within+label,
+form select:focus-within+label {
     color      : var(--deep-bluish-cyan);
     font-weight: 600;
 }
@@ -743,4 +749,61 @@ fieldset {
     /* Flip arrow in icon to make it indicate logout icon 😉  */
     -webkit-transform: scaleX(-1);
     transform        : scaleX(-1);
+}
+
+/* Inventory Page */
+#inventory input,
+#inventory select {
+    height: 2.75em;
+}
+
+#inventory fieldset {
+    margin-bottom: 1.5em;
+}
+
+#inventory fieldset label {
+    font-size  : 1.095em;
+    font-weight: 600;
+}
+
+#inventory h5 {
+    margin: 1em 0;
+}
+
+#feature-continaer {
+    display       : flex;
+    flex-direction: column;
+}
+
+.feature {
+    align-items    : center;
+    display        : flex;
+    flex-direction : row;
+    gap            : 1em;
+    justify-content: space-between;
+}
+
+.feature fieldset {
+    width: 100%;
+}
+
+.add-button {
+    padding: .25em .4em;
+}
+
+.delete-button {
+    background-color: var(--alert-color);
+    border-color    : var(--alert-color);
+    padding         : .5em .55em;
+}
+
+.delete-button:hover {
+    background-color: white;
+    color           : var(--alert-color);
+}
+
+#no-features-message {
+    border       : 2.5px solid var(--iceberg-blue);
+    border-radius: .25em;
+    height       : 16.75em;
 }
