@@ -9,7 +9,7 @@ import {
   faTruckFast,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { UserContext } from "../../App";
 import fakeData from "../../assets/fakeData";
@@ -24,6 +24,7 @@ import Header from "../../components/Header/Header";
 import { addToCart, showRatingStars } from "../../components/Product/Product";
 
 const ProductDetails = () => {
+  useEffect(() => {}, []);
   const { productKey } = useParams();
   // quantityAmount state - it will indicate how many items to be added to cart
   const [quantityAmount, setQuantityAmount] = useState(1);
@@ -33,7 +34,6 @@ const ProductDetails = () => {
   // Destructuring product properties.
   const {
     // eslint-disable-next-line no-unused-vars
-    key,
     name,
     img,
     price,
@@ -45,7 +45,7 @@ const ProductDetails = () => {
     shipping,
     features,
   } = product;
-  console.log(product);
+  console.log({ product });
 
   document.title = `${name} | Ema John`;
 
@@ -128,6 +128,7 @@ const ProductDetails = () => {
                       minimumIntegerDigits: 2,
                       useGrouping: false,
                     })}
+                    onChange={(e) => setQuantityAmount(e.target.value)}
                     name=""
                     id="quantity"
                   />
@@ -166,8 +167,8 @@ const ProductDetails = () => {
               <div className="features">
                 <h5>Features</h5>
                 <ul>
-                  {features.map((feature) => (
-                    <li>
+                  {features.map((feature, index) => (
+                    <li key={index}>
                       {feature.description}: {feature.value}
                     </li>
                   ))}

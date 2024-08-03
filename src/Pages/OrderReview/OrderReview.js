@@ -4,6 +4,7 @@ import React, { useContext } from "react";
 import { UserContext } from "../../App";
 import Cart from "../../components/Cart/Cart";
 import Header from "../../components/Header/Header";
+import NotFoundErrorMessage from "../../components/NotFoundErrorMessage/NotFoundErrorMessage";
 import Product from "../../components/Product/Product";
 
 const OrderReview = () => {
@@ -25,11 +26,12 @@ const OrderReview = () => {
                 />
               ))
             ) : (
-              <div className="empty-cart">
+              <NotFoundErrorMessage
+                erroMessage={"No items in your cart yet"}
+                remarks={"Browse our products and find something you love!"}
+              >
                 <FontAwesomeIcon className="icon" icon={faFaceFrown} />
-                <p>No items in your cart yet.</p>
-                <p>Browse our products and find something you love!</p>
-              </div>
+              </NotFoundErrorMessage>
             )}
           </div>
           <div className="col-3">

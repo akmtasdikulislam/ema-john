@@ -1,6 +1,7 @@
 :root {
     /* Colors */
     --alert-color      : #ff1111;
+    --success-color    : #09ec33;
     --bluish-cyan      : #1caee3;
     --carrot-orange    : #ff8500;
     --dark-jungle-green: #141b25;
@@ -42,6 +43,64 @@ table {
 .container {
     display: flex;
     width  : 80%;
+}
+
+/* Button */
+button {
+    align-items     : center;
+    background-color: var(--carrot-orange);
+    border          : 3px solid var(--carrot-orange);
+    border-radius   : .25em;
+    color           : white;
+    display         : flex;
+    flex-direction  : row;
+    font-size       : 1.05em;
+    font-weight     : 600;
+    gap             : .75em;
+    height          : auto;
+    justify-content : center;
+    padding         : .35em 1.75em;
+    transition      : all .2s ease-in-out;
+    width           : auto;
+}
+
+button:hover {
+    background-color: white;
+    color           : var(--carrot-orange);
+}
+
+/* Delete Button */
+.delete-button {
+    background-color: var(--alert-color);
+    border-color    : var(--alert-color);
+    padding         : .5em .55em;
+}
+
+.delete-button:hover {
+    background-color: white;
+    color           : var(--alert-color);
+}
+
+/* Done Button (By clicking it, it will complete an order) */
+.done-button {
+    background-color: var(--success-color);
+    border-color    : var(--success-color);
+}
+
+.done-button:hover {
+    color: var(--success-color);
+}
+
+/* Neutral Button (an optional button for user) */
+.neutral-button {
+    background-color: var(--iceberg-blue);
+    border-color    : var(--iceberg-blue);
+    color           : hsl(221, 45%, 55%);
+}
+
+.neutral-button:hover {
+    background-color: white;
+    color           : hsl(221, 45%, 55%);
 }
 
 /* Highlighted words within a sentence */
@@ -95,31 +154,6 @@ header nav a:hover {
 
 header nav a.active {
     color: var(--carrot-orange);
-}
-
-/* Sign in Button */
-
-button {
-    align-items     : center;
-    background-color: var(--carrot-orange);
-    border          : 3px solid var(--carrot-orange);
-    border-radius   : .25em;
-    color           : white;
-    display         : flex;
-    flex-direction  : row;
-    font-size       : 1.05em;
-    font-weight     : 600;
-    gap             : .75em;
-    height          : auto;
-    justify-content : center;
-    padding         : .35em 1.75em;
-    transition      : all .2s ease-in-out;
-    width           : auto;
-}
-
-button:hover {
-    background-color: white;
-    color           : var(--carrot-orange);
 }
 
 /* HOME Component */
@@ -421,9 +455,8 @@ input[type=number]::-webkit-outer-spin-button {
     text-align : center;
 }
 
-/* OrderReview Page */
-#order-review .empty-cart,
-#no-features-message {
+/* NotFoundErrorMessage Component*/
+.error-message {
     width          : 100%;
     height         : 100%;
     display        : flex;
@@ -434,14 +467,12 @@ input[type=number]::-webkit-outer-spin-button {
     color          : hsl(221, 45%, 85%);
 }
 
-#order-review .empty-cart .icon,
-#no-features-message .icon {
+.error-message .icon {
     font-size    : 2.75em;
     margin-bottom: .25em;
 }
 
-#order-review .empty-cart p,
-#no-features-message p {
+.error-message p {
     color      : hsl(221, 45%, 85%);
     font-weight: 600;
     margin     : 0;
@@ -766,6 +797,13 @@ form select:focus-within+label {
     font-weight: 600;
 }
 
+/* Input Field Aditional Indications */
+#inventory fieldset label .hint {
+    color      : hsl(221, 45%, 70%);
+    font-size  : .75em;
+    font-weight: 600;
+}
+
 #inventory h5 {
     margin: 1em 0;
 }
@@ -787,23 +825,179 @@ form select:focus-within+label {
     width: 100%;
 }
 
-.add-button {
+/* As it has no button text, that's why making it square shaped */
+.product-feature .add-button {
     padding: .25em .4em;
 }
 
-.delete-button {
-    background-color: var(--alert-color);
-    border-color    : var(--alert-color);
-    padding         : .5em .55em;
+#inventory .button-group {
+    align-items    : center;
+    display        : flex;
+    flex-direction : row;
+    gap            : 2em;
+    justify-content: center;
+    margin-top     : 1em;
+    width          : 100%;
 }
 
-.delete-button:hover {
-    background-color: white;
-    color           : var(--alert-color);
-}
-
-#no-features-message {
+/* The NotFounErrorMessage container within the Inventory page will have a specific height and border */
+#inventory .error-message {
     border       : 2.5px solid var(--iceberg-blue);
     border-radius: .25em;
     height       : 16.75em;
+}
+
+.my-products,
+.orders {
+    margin: 3em 0 0 0;
+}
+
+h3 {
+    margin-bottom: 1em;
+}
+
+#inventory table {
+    font-size: 1.05em;
+    width    : 100%;
+}
+
+#inventory table thead {
+    background-color: var(--iceberg-blue);
+    width           : 100%;
+}
+
+#inventory table thead tr {
+    height: 3em;
+    border: 2px solid var(--iceberg-blue);
+}
+
+#inventory table tbody {
+    width: 100%;
+}
+
+#inventory table tbody tr {
+    border  : 2px solid var(--iceberg-blue);
+    height  : 6em;
+    position: relative;
+}
+
+#inventory table th,
+#inventory table td {
+    min-width      : 9em;
+    border-collapse: collapse;
+    padding-left   : .5em;
+    padding-right  : 1em;
+}
+
+
+#inventory table th {
+    color      : hsl(221, 45%, 55%);
+    font-weight: 600;
+}
+
+
+#inventory table thead th:first-child {
+    padding-left: 1em;
+}
+
+
+#inventory table tbody td {
+    height: 100%;
+}
+
+/* Expect first element of each table row, all other elements will be center aligned. */
+#inventory table thead th:not(:first-child),
+#inventory table tbody td:not(:first-child) {
+    text-align: center;
+}
+
+/* Styling the cell which will contain product name and image. */
+#inventory .product-name-image {
+    display       : flex;
+    flex-direction: row;
+    align-items   : center;
+    gap           : 1em;
+    padding-left  : .75em;
+    text-align    : left;
+}
+
+#inventory .product-name-image img {
+    width : 3em;
+    height: 3em;
+}
+
+
+#inventory .product-name-image p {
+    margin: 0;
+}
+
+/* All the Product Price will be left aligned to show them in a straigt line from top to bottom */
+#inventory table tbody td.price {
+    text-align  : left;
+    /* As after assigning left alignment, the price goes far from its heading. That's why adding padding to left so that price amount stays directly under its heading */
+    padding-left: 2.5em;
+}
+
+/* OrderID will have a monospace font */
+#inventory table tbody td.order-id {
+    font-family: "Twilio Sans Mono", monospace;
+    font-weight: 400;
+}
+
+/* In table row every products/orders action cell */
+.actions {
+    align-items    : center;
+    display        : flex;
+    flex-direction : row;
+    gap            : .75em;
+    justify-content: center;
+}
+
+.actions button {
+    padding: 0;
+    width  : 2.25em;
+    height : 2.25em;
+}
+
+
+/* Overlay styling */
+.overlay {
+    display        : none;
+    /* Hidden by default */
+    height         : 100%;
+    left           : 0;
+    position       : fixed;
+    top            : 0;
+    width          : 100%;
+    background     : rgba(0, 0, 0, 0.5);
+    /* Dimmed background */
+    align-items    : center;
+    justify-content: center;
+    z-index        : 1000;
+    /* Ensure it is above other content */
+}
+
+.confirm-delete-modal {
+    align-items     : center;
+    background-color: white;
+    border-radius   : .5em;
+    display         : flex;
+    flex-direction  : column;
+    gap             : 1.5em;
+    height          : 25em;
+    justify-content : center;
+    opacity         : 100%;
+    width           : 45em;
+    z-index         : 9;
+}
+
+.confirm-delete-modal p {
+    margin     : 0;
+    font-size  : 1.5em;
+    font-weight: 700;
+}
+
+.confirm-delete-modal .button-group button {
+    width : 5.75em;
+    height: 2.25em;
 }
