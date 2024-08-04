@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import fakeData from "./assets/fakeData";
 import { getDatabaseCart } from "./assets/utilities/databaseManager";
-import AddNewProduct from "./Pages/AddNewProduct/AddNewProduct";
 import Home from "./Pages/Home/Home";
 import Inventory from "./Pages/Inventory/Inventory";
 import Login from "./Pages/Login/Login";
@@ -36,7 +35,6 @@ function App() {
           <Route exact path="/" element={<Home />} />
           <Route path="/order/review" element={<OrderReview />} />
           <Route path="/inventory" element={<Inventory />} />
-          <Route path="/add-new-product" element={<AddNewProduct />} />
           <Route
             path="/details/product/:productKey"
             element={<ProductDetails />}

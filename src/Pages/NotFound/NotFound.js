@@ -1,14 +1,20 @@
+import { faSadTear } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import Header from "../../components/Header/Header";
+import NotFoundErrorMessage from "../../components/NotFoundErrorMessage/NotFoundErrorMessage";
 
 const NotFound = () => {
+  document.title = "Oops! Page Not Found | Ema John";
   return (
-    <main>
+    <main id="not-found">
       <Header />
-      <div className="d-flex flex-column align-items-center justify-content-center w-100 h-100 mt-5">
-        <h1>404</h1>
-        <h1>Not Found</h1>
-      </div>
+      <NotFoundErrorMessage
+        erroMessage={"Oops! Page Not Found"}
+        remarks={"Please check your URL and try again"}
+      >
+        <FontAwesomeIcon className="icon" icon={faSadTear} />
+      </NotFoundErrorMessage>
     </main>
   );
 };

@@ -463,7 +463,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 /* NotFoundErrorMessage Component*/
-.error-message {
+.not-found-error-message {
     width          : 100%;
     height         : 100%;
     display        : flex;
@@ -474,12 +474,12 @@ input[type=number]::-webkit-outer-spin-button {
     color          : hsl(221, 45%, 85%);
 }
 
-.error-message .icon {
+.not-found-error-message .icon {
     font-size    : 2.75em;
     margin-bottom: .25em;
 }
 
-.error-message p {
+.not-found-error-message p {
     color      : hsl(221, 45%, 85%);
     font-weight: 600;
     margin     : 0;
@@ -841,7 +841,7 @@ form select:focus-within+label {
 }
 
 /* The NotFounErrorMessage container within the Inventory page will have a specific height and border */
-#inventory .error-message {
+#inventory .not-found-error-message {
     border       : 2.5px solid var(--iceberg-blue);
     border-radius: .25em;
     height       : 16.75em;
@@ -1067,4 +1067,11 @@ fieldset.error select {
     margin     : 0;
     color      : var(--alert-color);
     font-weight: 600;
+}
+
+/* NotFound Page */
+#not-found .not-found-error-message {
+    width    : 100%;
+    font-size: 2em;
+    height   : calc(100vh - 7.5em);
 }

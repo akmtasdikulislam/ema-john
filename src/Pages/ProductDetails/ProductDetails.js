@@ -10,7 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../App";
 import fakeData from "../../assets/fakeData";
 import amazonPay from "../../assets/images/cards/amazon-pay.svg";
@@ -24,16 +24,26 @@ import Header from "../../components/Header/Header";
 import { addToCart, showRatingStars } from "../../components/Product/Product";
 
 const ProductDetails = () => {
-  useEffect(() => {}, []);
   const { productKey } = useParams();
+  const navigate = useNavigate(); // Add this line to access the navigate function
   // quantityAmount state - it will indicate how many items to be added to cart
   const [quantityAmount, setQuantityAmount] = useState(1);
   // eslint-disable-next-line eqeqeq
-  const product = fakeData.find((product) => product.key == productKey);
+  const [product, setProduct] = useState(null);
   const { cart, setCart } = useContext(UserContext);
+  useEffect(() => {
+    // Find the product by the product key
+    const foundProduct = fakeData.find((product) => product.key === productKey);
+
+    // If no product is found, navigate to the Not Found page
+    if (!foundProduct) {
+      navigate("/not-found");
+    } else {
+      setProduct(foundProduct); // Set the product state
+    }
+  }, [productKey, navigate]);
   // Destructuring product properties.
   const {
-    // eslint-disable-next-line no-unused-vars
     name,
     img,
     price,
@@ -44,7 +54,7 @@ const ProductDetails = () => {
     stock,
     shipping,
     features,
-  } = product;
+  } = product || {};
   console.log({ product });
 
   document.title = `${name} | Ema John`;
@@ -163,7 +173,7 @@ const ProductDetails = () => {
                 <img src={stripe} alt="Stripe" />
               </div>
             </div>
-            {features.length > 0 ? (
+            {features && features.length > 0 && (
               <div className="features">
                 <h5>Features</h5>
                 <ul>
@@ -174,8 +184,6 @@ const ProductDetails = () => {
                   ))}
                 </ul>
               </div>
-            ) : (
-              ""
             )}
           </div>
         </div>

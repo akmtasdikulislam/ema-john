@@ -2,7 +2,7 @@ import React from "react";
 
 const NotFoundErrorMessage = ({ children, erroMessage, remarks }) => {
   return (
-    <div className="error-message">
+    <div className="not-found-error-message">
       {children}
       <p>{erroMessage}</p>
       <p>{remarks && remarks}</p>
