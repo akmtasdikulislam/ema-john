@@ -109,6 +109,13 @@ button:hover {
     font-weight: 600;
 }
 
+/* Input Field Aditional Indications */
+.small-text {
+    color      : hsl(221, 45%, 70%);
+    font-size  : .75em;
+    font-weight: 600;
+}
+
 .link {
     text-decoration: none;
 }
@@ -797,13 +804,6 @@ form select:focus-within+label {
     font-weight: 600;
 }
 
-/* Input Field Aditional Indications */
-#inventory fieldset label .hint {
-    color      : hsl(221, 45%, 70%);
-    font-size  : .75em;
-    font-weight: 600;
-}
-
 #inventory h5 {
     margin: 1em 0;
 }
@@ -1000,4 +1000,71 @@ h3 {
 .confirm-delete-modal .button-group button {
     width : 5.75em;
     height: 2.25em;
+}
+
+.error {
+    color      : red;
+    font-weight: bold;
+}
+
+.shake {
+    animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both;
+}
+
+@keyframes shake {
+
+    10%,
+    90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+
+    20%,
+    80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+
+    40%,
+    60% {
+        transform: translate3d(4px, 0, 0);
+    }
+}
+
+fieldset.error label {
+    color: var(--alert-color);
+}
+
+fieldset.error input,
+fieldset.error select {
+    border-color: var(--alert-color);
+}
+
+#error-message {
+    width           : max-content;
+    display         : none;
+    align-items     : center;
+    justify-content : center;
+    padding         : .75em 1.5em;
+    background-color: hsl(0, 100%, 90%);
+    color           : var(--alert-color);
+    font-size       : 1.1em;
+    gap             : .75em;
+    border-radius   : .5em;
+    margin          : 1em auto;
+
+}
+
+#error-message .icon {
+    font-size: 1.25em;
+}
+
+#error-message p {
+    margin     : 0;
+    color      : var(--alert-color);
+    font-weight: 600;
 }

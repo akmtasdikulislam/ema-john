@@ -1,7 +1,7 @@
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { generateOrderID } from "../../Pages/Inventory/Inventory";
+import { generateOrderID } from "../../functions/generateOrderID";
 
 const OrderRecordRow = ({ product }) => {
   const { img, name } = product;
