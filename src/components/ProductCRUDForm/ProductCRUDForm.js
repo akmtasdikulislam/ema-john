@@ -363,7 +363,7 @@ const ProductCRUDForm = ({
         </div>
       </form>
       {/* Form Submition button */}
-      <div id="error-message">
+      <div className="message" id="error-message">
         <FontAwesomeIcon className="icon" icon={faCircleExclamation} />
         <p>Please fill in all required fields before submitting.</p>
       </div>

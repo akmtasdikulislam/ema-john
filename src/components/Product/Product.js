@@ -1,9 +1,18 @@
-import { faShoppingCart, faStar } from "@fortawesome/free-solid-svg-icons";
+import {
+  faShoppingCart,
+  faStar,
+  faTrashAlt,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../App";
-import { addToDatabaseCart } from "../../assets/utilities/databaseManager";
+import { addToCart } from "../../functions/addToCart";
+import { decreaseQuantity } from "../../functions/decreaseQuantity";
+import { formatNumber } from "../../functions/formatNumber";
+import { increaseQuantity } from "../../functions/increaseQuantity";
+import { removeProductFromCart } from "../../functions/removeProductFromCart";
+import { updateQuantityAmount } from "../../functions/updateQuantityAmount";
 
 // A function to show rating stars depending on their rating numbers.
 export const showRatingStars = (star) => {
@@ -26,59 +35,24 @@ export const showRatingStars = (star) => {
   return stars;
 };
 
-export // Add product to cart
-const addToCart = (cart, setCart, productDetails, quantityAmount) => {
-  // Finding whether cart already has same product or not
-  // eslint-disable-next-line eqeqeq
-  const sameProduct = cart.find((product) => productDetails.key == product.key);
-
-  if (sameProduct) {
-    // If a product which is already in the cart is added again, then it won't add the same product as a new item in cart rather it will increase its quantity by 1.
-    productDetails.quantity =
-      productDetails.quantity + (quantityAmount ? quantityAmount : 1);
-    // Then it will update that same product.
-
-    // To do so, at first seperating all other products except the same product from cart by using filter() method on cart, which will check if the product keys of the products in the cart does match with the same product or not. Then it will return the products in the cart which's key does not match with the same product's key.
-    const otherProductsInCart = cart.filter(
-      (product) => product.key !== productDetails.key
-    );
-    // Then overriding the cart by adding other products and quantity updated same product. Here using spead operator (...) to copy all items from otherProductsInCart array to a new Array which will also have the quantity updated same product.
-    setCart([...otherProductsInCart, productDetails]);
-    // Also saving newly added product to browser's localStorage in order to make the cart persistent so that even after reloading the page, cart won't lost.
-    addToDatabaseCart(productDetails.key, productDetails.quantity);
-  } else {
-    // And if the product is added for the first time, then add a new "quantity" key to it with the value set to 1.
-    productDetails.quantity = quantityAmount ? quantityAmount : 1;
-    // Then make a new cart array containing old cart items by copying them using spread operator and newly added prodcut.
-    setCart([...cart, productDetails]);
-    // Also saving newly added product to browser's localStorage in order to make the cart persistent so that even after reloading the page, cart won't lost.
-    addToDatabaseCart(productDetails.key, productDetails.quantity);
-  }
-};
-
 const Product = ({ productDetails, parent }) => {
   // Destructuring product properties.
-  const {
-    key,
-    name,
-    img,
-    price,
-    priceFraction,
-    star,
-    starCount,
-    seller,
-    quantity,
-  } = productDetails;
+  const { key, name, img, price, priceFraction, star, starCount, seller } =
+    productDetails;
 
   // Converting single digit numbers into double digit numbers (it means, from 1-9 all single digit numbers will have a zero in front of them. Like: 01, 02 ... etc.)
   let { stock } = productDetails;
-  stock = stock.toLocaleString("en-US", {
-    minimumIntegerDigits: 2,
-    useGrouping: false,
-  });
+  stock = formatNumber(stock);
 
   // Accessing {cart and setCart} using context api
   const { cart, setCart } = useContext(UserContext);
+  const [quantityAmount, setQuantityAmount] = useState(1);
+
+  useEffect(() => {
+    // Update the quantity amount when the component mounts
+    updateQuantityAmount(cart, key, setQuantityAmount);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="product row">
@@ -136,15 +110,7 @@ const Product = ({ productDetails, parent }) => {
               <td className="col-7">
                 {
                   // eslint-disable-next-line eqeqeq
-                  parent == "cart" ? (
-                    <p>
-                      Quantity:{" "}
-                      {quantity.toLocaleString("en-US", {
-                        minimumIntegerDigits: 2,
-                        useGrouping: false,
-                      })}
-                    </p>
-                  ) : stock < 10 ? (
+                  stock < 10 ? (
                     <p>
                       Stock: Only <span className="highlight">{stock}</span>{" "}
                       items are available
@@ -173,6 +139,57 @@ const Product = ({ productDetails, parent }) => {
             </button>
           )
         }
+        {parent == "cart" && (
+          <div className="d-flex flex-row align-items-center">
+            <div className="quantity d-flex flex-row align-items-center">
+              <button
+                onClick={() => {
+                  decreaseQuantity(
+                    { alreadyInCart: true },
+                    cart,
+                    productDetails,
+                    quantityAmount,
+                    setCart,
+                    setQuantityAmount
+                  );
+                }}
+              >
+                -
+              </button>
+              <input
+                type="number"
+                value={formatNumber(quantityAmount)}
+                onChange={(e) => {
+                  setQuantityAmount(e.target.value);
+                }}
+                name=""
+                id="quantity"
+              />
+              <button
+                onClick={() => {
+                  increaseQuantity(
+                    { alreadyInCart: true },
+                    cart,
+                    productDetails,
+                    quantityAmount,
+                    setCart,
+                    setQuantityAmount
+                  );
+                }}
+              >
+                +
+              </button>
+            </div>
+            <button
+              onClick={() => {
+                removeProductFromCart(productDetails, cart, setCart);
+              }}
+              className="ms-3 delete-button"
+            >
+              <FontAwesomeIcon icon={faTrashAlt} /> Remove Product
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

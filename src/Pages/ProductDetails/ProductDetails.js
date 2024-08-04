@@ -5,6 +5,7 @@ import {
   faBox,
   faFaceSmileBeam,
   faShoppingCart,
+  faSquareCheck,
   faStar,
   faTruckFast,
 } from "@fortawesome/free-solid-svg-icons";
@@ -21,7 +22,12 @@ import stripe from "../../assets/images/cards/stripe.svg";
 import visa from "../../assets/images/cards/visa.svg";
 import CustomerReview from "../../components/CustomerReview/CustomerReview";
 import Header from "../../components/Header/Header";
-import { addToCart, showRatingStars } from "../../components/Product/Product";
+import { showRatingStars } from "../../components/Product/Product";
+import { addToCart } from "../../functions/addToCart";
+import { decreaseQuantity } from "../../functions/decreaseQuantity";
+import { findProductInCart } from "../../functions/findProductInCart";
+import { formatNumber } from "../../functions/formatNumber";
+import { increaseQuantity } from "../../functions/increaseQuantity";
 
 const ProductDetails = () => {
   const { productKey } = useParams();
@@ -31,6 +37,7 @@ const ProductDetails = () => {
   // eslint-disable-next-line eqeqeq
   const [product, setProduct] = useState(null);
   const { cart, setCart } = useContext(UserContext);
+  const [productExistsInCart, setProductExistsInCart] = useState(false);
   useEffect(() => {
     // Find the product by the product key
     const foundProduct = fakeData.find((product) => product.key === productKey);
@@ -44,6 +51,7 @@ const ProductDetails = () => {
   }, [productKey, navigate]);
   // Destructuring product properties.
   const {
+    key,
     name,
     img,
     price,
@@ -55,21 +63,13 @@ const ProductDetails = () => {
     shipping,
     features,
   } = product || {};
-  console.log({ product });
-
   document.title = `${name} | Ema John`;
-
-  // Quantity increment
-  const quantityIncrement = () => {
-    setQuantityAmount(quantityAmount + 1);
-  };
-  // Quantity reduction
-  const quantityReduction = () => {
-    if (quantityAmount > 1) {
-      setQuantityAmount(quantityAmount - 1);
+  useEffect(() => {
+    if (findProductInCart(cart, key)) {
+      setProductExistsInCart(true);
+      document.getElementById("success-message").style.display = "flex";
     }
-  };
-
+  }, [key, cart]);
   return (
     <main id="product-details">
       <Header />
@@ -127,24 +127,35 @@ const ProductDetails = () => {
                 <div className="quantity d-flex flex-row align-items-center">
                   <button
                     onClick={() => {
-                      quantityReduction();
+                      decreaseQuantity(
+                        { toBeAddedToCart: false },
+                        cart,
+                        product,
+                        quantityAmount,
+                        setCart,
+                        setQuantityAmount
+                      );
                     }}
                   >
                     -
                   </button>
                   <input
                     type="number"
-                    value={quantityAmount.toLocaleString("en-US", {
-                      minimumIntegerDigits: 2,
-                      useGrouping: false,
-                    })}
+                    value={formatNumber(quantityAmount)}
                     onChange={(e) => setQuantityAmount(e.target.value)}
                     name=""
                     id="quantity"
                   />
                   <button
                     onClick={() => {
-                      quantityIncrement();
+                      increaseQuantity(
+                        { toBeAddedToCart: false },
+                        cart,
+                        product,
+                        quantityAmount,
+                        setCart,
+                        setQuantityAmount
+                      );
                     }}
                   >
                     +
@@ -153,14 +164,18 @@ const ProductDetails = () => {
                 <button
                   onClick={() => {
                     addToCart(cart, setCart, product, quantityAmount);
-                    console.log("added to cart", { cart });
                   }}
                   className="ms-3"
                 >
-                  <FontAwesomeIcon icon={faShoppingCart} /> Add to cart
+                  <FontAwesomeIcon icon={faShoppingCart} />{" "}
+                  {productExistsInCart ? "Add more to cart" : "Add to cart"}
                 </button>
               </div>
               <p className="shipping">Shipping & Handeling: $ {shipping}</p>
+            </div>
+            <div className="message" id="success-message">
+              <FontAwesomeIcon className="icon" icon={faSquareCheck} />
+              <p>This product is already added to cart! </p>
             </div>
             <div className="we-accept">
               We Accept

@@ -375,6 +375,7 @@ aside.cart {
 .quantity {
     border: 1px solid var(--iceberg-blue);
     height: 2.5em;
+    width : fit-content;
 }
 
 .quantity button {
@@ -1044,34 +1045,51 @@ fieldset.error select {
     border-color: var(--alert-color);
 }
 
-#error-message {
-    width           : max-content;
-    display         : none;
-    align-items     : center;
-    justify-content : center;
-    padding         : .75em 1.5em;
-    background-color: hsl(0, 100%, 90%);
-    color           : var(--alert-color);
-    font-size       : 1.1em;
-    gap             : .75em;
-    border-radius   : .5em;
-    margin          : 1em auto;
-
+/* Message Container */
+.message {
+    align-items    : center;
+    border-radius  : .5em;
+    gap            : .75em;
+    justify-content: center;
+    padding        : .75em 1.5em;
 }
 
-#error-message .icon {
+.message p {
+    margin     : 0;
+    font-weight: 600;
+}
+
+#error-message {
+    background-color: hsl(0, 100%, 90%);
+    color           : var(--alert-color);
+    display         : none;
+    font-size       : 1.1em;
+    margin          : 1em auto;
+    width           : max-content;
+}
+
+.message .icon {
     font-size: 1.25em;
 }
 
 #error-message p {
-    margin     : 0;
-    color      : var(--alert-color);
-    font-weight: 600;
+    color: var(--alert-color);
+}
+
+#success-message {
+    background-color: hsl(120, 100%, 90%);
+    color           : hsl(120, 100%, 30%);
+    display         : none;
+    margin-top      : .5em;
+}
+
+#success-message p {
+    color: hsl(120, 100%, 30%);
 }
 
 /* NotFound Page */
 #not-found .not-found-error-message {
-    width    : 100%;
     font-size: 2em;
     height   : calc(100vh - 7.5em);
+    width    : 100%;
 }
