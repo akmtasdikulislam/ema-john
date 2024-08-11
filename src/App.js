@@ -10,29 +10,32 @@ import NotFound from "./Pages/NotFound/NotFound";
 import OrderReview from "./Pages/OrderReview/OrderReview";
 import ProductDetails from "./Pages/ProductDetails/ProductDetails";
 import SignUp from "./Pages/SignUp/SignUp";
-import { initializeApp } from "firebase/app";
-require("dotenv").config();
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 // Creating a context api named "UserContext" which will contain currently active user's login informations and cart history.
 export const UserContext = createContext();
 function App() {
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: process.env.API_KEY,
-    authDomain: process.env.AUTH_DOMAIN,
-    projectId: process.env.PROJECT_ID,
-    storageBucket: process.env.STORAGE_BUCKET,
-    messagingSenderId: process.env.MESSAGING_SENDER_ID,
-    appId: process.env.APP_ID,
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-
-  console.log(firebaseConfig);
   // Declaring cart (an Array) using useState.
   const [cart, setCart] = useState([]);
+  const [user, setUser] = useState({});
 
+  const auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/auth.user
+      const uid = user.uid;
+      setUser(user);
+      const expirationTime = user.stsTokenManager.expirationTime; // example Unix timestamp
+      const expirationDate = new Date(expirationTime * 1000); // convert to Date object
+
+      console.log(expirationDate.toLocaleString("en-US")); // output: "2022-02-01T12:30:00.000Z"
+      // ...
+    } else {
+      // User is signed out
+      // ...
+    }
+  });
   // While website is being loded, it will get previously added products from browser's localStorage and store them in cart array (state).
   useEffect(() => {
     const savedCart = getDatabaseCart();
@@ -48,7 +51,7 @@ function App() {
     setCart(previousCart);
   }, []);
   return (
-    <UserContext.Provider value={{ cart, setCart }}>
+    <UserContext.Provider value={{ user, cart, setCart }}>
       <div className="App">
         <Routes>
           <Route exact path="/" element={<Home />} />

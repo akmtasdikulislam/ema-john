@@ -3,8 +3,8 @@ import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Link } from "react-router-dom";
-import google from "../../assets/images/google.svg";
 import logo from "../../assets/images/logo.png";
+import ContinueWithGoogleButton from "../../components/ContinueWithGoogleButton/ContinueWithGoogleButton";
 
 const Login = () => {
   document.title = "Login | Ema John";
@@ -57,9 +57,7 @@ const Login = () => {
           </form>
           <button>Login</button>
           <p className="or-text">Or</p>
-          <button className="google-button">
-            <img src={google} alt="Google" /> Log in with Google
-          </button>
+          <ContinueWithGoogleButton />
           <p>
             Don't have an account? <Link to="/sign-up">Sign up</Link>
           </p>
