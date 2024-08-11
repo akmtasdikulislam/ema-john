@@ -22,12 +22,12 @@ import stripe from "../../assets/images/cards/stripe.svg";
 import visa from "../../assets/images/cards/visa.svg";
 import CustomerReview from "../../components/CustomerReview/CustomerReview";
 import Header from "../../components/Header/Header";
-import { showRatingStars } from "../../components/Product/Product";
-import { addToCart } from "../../functions/addToCart";
-import { decreaseQuantity } from "../../functions/decreaseQuantity";
+import { addProductToCart } from "../../functions/addProductToCart";
+import { decreaseProductQuantity } from "../../functions/decreaseProductQuantity";
 import { findProductInCart } from "../../functions/findProductInCart";
 import { formatNumber } from "../../functions/formatNumber";
-import { increaseQuantity } from "../../functions/increaseQuantity";
+import { increaseProductQuantity } from "../../functions/increaseProductQuantity";
+import { showRatingStars } from "../../functions/showRatingStars";
 
 const ProductDetails = () => {
   const { productKey } = useParams();
@@ -35,7 +35,7 @@ const ProductDetails = () => {
   // quantityAmount state - it will indicate how many items to be added to cart
   const [quantityAmount, setQuantityAmount] = useState(1);
   // eslint-disable-next-line eqeqeq
-  const [product, setProduct] = useState(null);
+  const [product, setProduct] = useState({});
   const { cart, setCart } = useContext(UserContext);
   const [productExistsInCart, setProductExistsInCart] = useState(false);
   useEffect(() => {
@@ -88,19 +88,19 @@ const ProductDetails = () => {
               {/* Now calling the "showRatingStars" function. Then running .map method on the returned array (containing how many "filled" and "empty stars are required") and conditionally rendering "filled" or "empty" stars to show rating. */}
               <span className="rating-stars">
                 {showRatingStars(star).map(
-                  (ratingStarType) =>
+                  (ratingStarType, index) =>
                     // eslint-disable-next-line eqeqeq
                     ratingStarType == "filled" ? (
                       // If the ratingStarType is "filled" then a "filled" star is rendered.
                       <FontAwesomeIcon
-                        key={ratingStarType + Math.random() * 99}
+                        key={index}
                         className="filled-stars"
                         icon={faStar}
                       />
                     ) : (
                       // Else if the ratingStarType is "empty" then a "empty" star is rendered.
                       <FontAwesomeIcon
-                        key={ratingStarType + Math.random() * 99}
+                        key={index}
                         className="empty-stars"
                         icon={faStar}
                       />
@@ -127,14 +127,11 @@ const ProductDetails = () => {
                 <div className="quantity d-flex flex-row align-items-center">
                   <button
                     onClick={() => {
-                      decreaseQuantity(
-                        { toBeAddedToCart: false },
-                        cart,
-                        product,
-                        quantityAmount,
-                        setCart,
-                        setQuantityAmount
-                      );
+                      decreaseProductQuantity({
+                        currentQuantity: quantityAmount,
+                        updateQuantity: setQuantityAmount,
+                        shouldAddToCart: false,
+                      });
                     }}
                   >
                     -
@@ -148,14 +145,11 @@ const ProductDetails = () => {
                   />
                   <button
                     onClick={() => {
-                      increaseQuantity(
-                        { toBeAddedToCart: false },
-                        cart,
-                        product,
-                        quantityAmount,
-                        setCart,
-                        setQuantityAmount
-                      );
+                      increaseProductQuantity({
+                        currentQuantity: quantityAmount,
+                        updateQuantity: setQuantityAmount,
+                        shouldAddToCart: false,
+                      });
                     }}
                   >
                     +
@@ -163,7 +157,12 @@ const ProductDetails = () => {
                 </div>
                 <button
                   onClick={() => {
-                    addToCart(cart, setCart, product, quantityAmount);
+                    addProductToCart({
+                      currentQuantity: quantityAmount,
+                      productInfo: product,
+                      updateCart: setCart,
+                      currentCart: cart,
+                    });
                   }}
                   className="ms-3"
                 >

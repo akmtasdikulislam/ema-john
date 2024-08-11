@@ -7,33 +7,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../App";
-import { addToCart } from "../../functions/addToCart";
-import { decreaseQuantity } from "../../functions/decreaseQuantity";
+import { addProductToCart } from "../../functions/addProductToCart";
+
 import { formatNumber } from "../../functions/formatNumber";
-import { increaseQuantity } from "../../functions/increaseQuantity";
+
 import { removeProductFromCart } from "../../functions/removeProductFromCart";
 import { updateQuantityAmount } from "../../functions/updateQuantityAmount";
-
-// A function to show rating stars depending on their rating numbers.
-export const showRatingStars = (star) => {
-  // At first, declaring an empty array called "stars", where different types of stars like "filled" or "empty" type will be stored to determine rating from  rating number.
-  let stars = [];
-  // Determining how many "filled" stars are required. As rating number indicates the rating, that's why the star number (which is destructured from productDetails) is directly assigned to it.
-  let filledStarNumber = star;
-  // Then determinig how many "empty" or "blank" stars are required. To determine this, subtracting 'star number' from 5 as it will show rating between 0 to 5.
-  let emptyStarNumber = 5 - star;
-
-  // Running a for loop to indicate how many "filled" stars are required by storing "filled" category everytime in "stars" variable.
-  for (let index = 0; index < filledStarNumber; index++) {
-    stars.push("filled");
-  }
-  // Running a for loop to indicate how many "empty" stars are required by storing "empty" category everytime in "stars" variable.
-  for (let index = 0; index < emptyStarNumber; index++) {
-    stars.push("empty");
-  }
-  // Finally, returning the stars array.(It means if we run this function, we will get an array).
-  return stars;
-};
+import { increaseProductQuantity } from "../../functions/increaseProductQuantity";
+import { decreaseProductQuantity } from "../../functions/decreaseProductQuantity";
+import { showRatingStars } from "../../functions/showRatingStars";
 
 const Product = ({ productDetails, parent }) => {
   // Destructuring product properties.
@@ -53,7 +35,6 @@ const Product = ({ productDetails, parent }) => {
     updateQuantityAmount(cart, key, setQuantityAmount);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   return (
     <div className="product row">
       <div className="col-3">
@@ -79,19 +60,19 @@ const Product = ({ productDetails, parent }) => {
                   {/* Now calling the "showRatingStars" function. Then running .map method on the returned array (containing how many "filled" and "empty stars are required") and conditionally rendering "filled" or "empty" stars to show rating. */}
                   <span className="rating-stars">
                     {showRatingStars(star).map(
-                      (ratingStarType) =>
+                      (ratingStarType, index) =>
                         // eslint-disable-next-line eqeqeq
                         ratingStarType == "filled" ? (
                           // If the ratingStarType is "filled" then a "filled" star is rendered.
                           <FontAwesomeIcon
-                            key={ratingStarType + Math.random() * 99}
+                            key={index}
                             className="filled-stars"
                             icon={faStar}
                           />
                         ) : (
                           // Else if the ratingStarType is "empty" then a "empty" star is rendered.
                           <FontAwesomeIcon
-                            key={ratingStarType + Math.random() * 99}
+                            key={index}
                             className="empty-stars"
                             icon={faStar}
                           />
@@ -127,31 +108,32 @@ const Product = ({ productDetails, parent }) => {
           // eslint-disable-next-line eqeqeq
           parent == "home" && (
             <button
-              onClick={
-                () => {
-                  addToCart(cart, setCart, productDetails);
-                }
-                // when "Add to cart" button is clicked, it inserts the product object into cart (array). By using spread operator (...cart), inserting new item without removing other products in cart.
-              }
+              onClick={() => {
+                addProductToCart({
+                  currentCart: cart,
+                  productInfo: productDetails,
+                  updateCart: setCart,
+                });
+              }}
             >
               <FontAwesomeIcon icon={faShoppingCart} />
               Add to cart
             </button>
           )
         }
-        {parent == "cart" && (
+        {parent === "cart" && (
           <div className="d-flex flex-row align-items-center">
             <div className="quantity d-flex flex-row align-items-center">
               <button
                 onClick={() => {
-                  decreaseQuantity(
-                    { alreadyInCart: true },
-                    cart,
-                    productDetails,
-                    quantityAmount,
-                    setCart,
-                    setQuantityAmount
-                  );
+                  decreaseProductQuantity({
+                    currentCart: cart,
+                    productInfo: productDetails,
+                    currentQuantity: quantityAmount,
+                    updateCart: setCart,
+                    updateQuantity: setQuantityAmount,
+                    shouldAddToCart: true,
+                  });
                 }}
               >
                 -
@@ -167,14 +149,14 @@ const Product = ({ productDetails, parent }) => {
               />
               <button
                 onClick={() => {
-                  increaseQuantity(
-                    { alreadyInCart: true },
-                    cart,
-                    productDetails,
-                    quantityAmount,
-                    setCart,
-                    setQuantityAmount
-                  );
+                  increaseProductQuantity({
+                    currentCart: cart,
+                    productInfo: productDetails,
+                    currentQuantity: quantityAmount,
+                    updateCart: setCart,
+                    updateQuantity: setQuantityAmount,
+                    shouldAddToCart: true,
+                  });
                 }}
               >
                 +

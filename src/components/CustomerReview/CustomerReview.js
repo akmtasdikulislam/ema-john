@@ -2,7 +2,7 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import displayPhoto from "../../assets/images/demo-dp.png";
-import { showRatingStars } from "../Product/Product";
+import { showRatingStars } from "../../functions/showRatingStars";
 
 const CustomerReview = () => {
   return (
@@ -16,19 +16,19 @@ const CustomerReview = () => {
           <div className="rating">
             <p>
               {showRatingStars("4").map(
-                (ratingStarType) =>
+                (ratingStarType, index) =>
                   // eslint-disable-next-line eqeqeq
                   ratingStarType == "filled" ? (
                     // If the ratingStarType is "filled" then a "filled" star is rendered.
                     <FontAwesomeIcon
-                      key={ratingStarType + Math.random() * 99}
+                      key={index}
                       className="filled-stars"
                       icon={faStar}
                     />
                   ) : (
                     // Else if the ratingStarType is "empty" then a "empty" star is rendered.
                     <FontAwesomeIcon
-                      key={ratingStarType + Math.random() * 99}
+                      key={index}
                       className="empty-stars"
                       icon={faStar}
                     />
