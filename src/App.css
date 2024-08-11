@@ -1,12 +1,14 @@
 :root {
     /* Colors */
-    --alert-color      : #ff1111;
-    --success-color    : #09ec33;
-    --bluish-cyan      : #1caee3;
-    --carrot-orange    : #ff8500;
-    --dark-jungle-green: #141b25;
-    --deep-bluish-cyan : #00b4f5;
-    --iceberg-blue     : #E7EEFD;
+    --bluish-cyan        : #1caee3;
+    --carrot-orange      : #ff8500;
+    --dark-jungle-green  : #141b25;
+    --deep-bluish-cyan   : #00b4f5;
+    --erro-color-light   : #ffcccc;
+    --error-color        : #ff1111;
+    --iceberg-blue       : #E7EEFD;
+    --success-color      : #009900;
+    --success-color-light: #ccffcc;
 
     /* Base Font Size */
     font-size: 16px;
@@ -71,14 +73,14 @@ button:hover {
 
 /* Delete Button */
 .delete-button {
-    background-color: var(--alert-color);
-    border-color    : var(--alert-color);
+    background-color: var(--error-color);
+    border-color    : var(--error-color);
     padding         : .5em .55em;
 }
 
 .delete-button:hover {
     background-color: white;
-    color           : var(--alert-color);
+    color           : var(--error-color);
 }
 
 /* Done Button (By clicking it, it will complete an order) */
@@ -105,7 +107,7 @@ button:hover {
 
 /* Highlighted words within a sentence */
 .highlight {
-    color      : var(--alert-color);
+    color      : var(--error-color);
     font-weight: 600;
 }
 
@@ -1037,12 +1039,12 @@ h3 {
 }
 
 fieldset.error label {
-    color: var(--alert-color);
+    color: var(--error-color);
 }
 
 fieldset.error input,
 fieldset.error select {
-    border-color: var(--alert-color);
+    border-color: var(--error-color);
 }
 
 /* Message Container */
@@ -1060,8 +1062,8 @@ fieldset.error select {
 }
 
 #error-message {
-    background-color: hsl(0, 100%, 90%);
-    color           : var(--alert-color);
+    background-color: var(--erro-color-light);
+    color           : var(--error-color);
     display         : none;
     font-size       : 1.1em;
     margin          : 1em auto;
@@ -1073,18 +1075,18 @@ fieldset.error select {
 }
 
 #error-message p {
-    color: var(--alert-color);
+    color: var(--error-color);
 }
 
 #success-message {
-    background-color: hsl(120, 100%, 90%);
-    color           : hsl(120, 100%, 30%);
+    background-color: var(--success-color-light);
+    color           : var(--success-color);
     display         : none;
     margin-top      : .5em;
 }
 
 #success-message p {
-    color: hsl(120, 100%, 30%);
+    color: var(--success-color);
 }
 
 /* NotFound Page */

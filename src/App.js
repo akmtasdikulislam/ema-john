@@ -10,10 +10,26 @@ import NotFound from "./Pages/NotFound/NotFound";
 import OrderReview from "./Pages/OrderReview/OrderReview";
 import ProductDetails from "./Pages/ProductDetails/ProductDetails";
 import SignUp from "./Pages/SignUp/SignUp";
+import { initializeApp } from "firebase/app";
+require("dotenv").config();
 
 // Creating a context api named "UserContext" which will contain currently active user's login informations and cart history.
 export const UserContext = createContext();
 function App() {
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messagingSenderId: process.env.MESSAGING_SENDER_ID,
+    appId: process.env.APP_ID,
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+
+  console.log(firebaseConfig);
   // Declaring cart (an Array) using useState.
   const [cart, setCart] = useState([]);
 
