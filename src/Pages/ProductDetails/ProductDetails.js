@@ -12,7 +12,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { UserContext } from "../../App";
+import { AppDataContext } from "../../App";
 import fakeData from "../../assets/fakeData";
 import amazonPay from "../../assets/images/cards/amazon-pay.svg";
 import masterCard from "../../assets/images/cards/master-card.svg";
@@ -36,7 +36,7 @@ const ProductDetails = () => {
   const [quantityAmount, setQuantityAmount] = useState(1);
   // eslint-disable-next-line eqeqeq
   const [product, setProduct] = useState({});
-  const { cart, setCart } = useContext(UserContext);
+  const { cart, setCart } = useContext(AppDataContext);
   const [productExistsInCart, setProductExistsInCart] = useState(false);
   useEffect(() => {
     // Find the product by the product key

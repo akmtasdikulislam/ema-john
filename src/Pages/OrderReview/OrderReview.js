@@ -1,7 +1,7 @@
 import { faFaceFrown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext } from "react";
-import { UserContext } from "../../App";
+import { AppDataContext } from "../../App";
 import Cart from "../../components/Cart/Cart";
 import Header from "../../components/Header/Header";
 import NotFoundErrorMessage from "../../components/NotFoundErrorMessage/NotFoundErrorMessage";
@@ -9,7 +9,7 @@ import Product from "../../components/Product/Product";
 
 const OrderReview = () => {
   document.title = "Order Review | Ema John";
-  const { cart } = useContext(UserContext);
+  const { cart } = useContext(AppDataContext);
   return (
     <main id="order-review">
       <Header />

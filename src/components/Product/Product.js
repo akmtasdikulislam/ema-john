@@ -6,7 +6,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { UserContext } from "../../App";
+import { AppDataContext } from "../../App";
 import { addProductToCart } from "../../functions/addProductToCart";
 
 import { formatNumber } from "../../functions/formatNumber";
@@ -27,7 +27,7 @@ const Product = ({ productDetails, parent }) => {
   stock = formatNumber(stock);
 
   // Accessing {cart and setCart} using context api
-  const { cart, setCart } = useContext(UserContext);
+  const { cart, setCart } = useContext(AppDataContext);
   const [quantityAmount, setQuantityAmount] = useState(1);
 
   useEffect(() => {

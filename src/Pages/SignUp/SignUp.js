@@ -1,12 +1,46 @@
+// Import the faArrowLeftLong icon from the @fortawesome/free-solid-svg-icons library
 import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
+
+// Import the FontAwesomeIcon component from the @fortawesome/react-fontawesome library
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import { Link } from "react-router-dom";
+
+// Import the React library and its useContext and useEffect hooks
+import React, { useContext, useEffect } from "react";
+
+// Import the Link component and useNavigate hook from the react-router-dom library
+import { Link, useNavigate } from "react-router-dom";
+
+// Import the logo image from the ../../assets/images/logo.png file
 import logo from "../../assets/images/logo.png";
+
+// Import the ContinueWithGoogleButton component from the ../../components/ContinueWithGoogleButton/ContinueWithGoogleButton file
 import ContinueWithGoogleButton from "../../components/ContinueWithGoogleButton/ContinueWithGoogleButton";
 
+// Import the AppDataContext from the ../../App file
+import { AppDataContext } from "../../App";
+
+// Define a functional component named SignUp
 const SignUp = () => {
-  document.title = "Sign up | Ema John";
+  // Use the useNavigate hook to get a reference to the navigate function
+  const navigate = useNavigate();
+
+  // Use the useContext hook to get the user object from the AppDataContext
+  const { user } = useContext(AppDataContext);
+
+  // Use the useEffect hook to set the document title to "Sign up | Ema John" when the component mounts
+  useEffect(() => {
+    // Set the document title to "Sign up | Ema John"
+    document.title = "Sign up | Ema John";
+  }, []);
+
+  // Use the useEffect hook to navigate to the root URL when the user object changes
+  useEffect(() => {
+    // Check if the user object is truthy
+    if (user) {
+      // Navigate to the root URL
+      navigate("/");
+    }
+  }, [user, navigate]);
   return (
     <main id="sign-up" className="row">
       <div className="col-6" id="photo-column">

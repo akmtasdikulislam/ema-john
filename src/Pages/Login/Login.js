@@ -1,13 +1,53 @@
-import { faCircleCheck } from "@fortawesome/free-regular-svg-icons";
-import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import { Link } from "react-router-dom";
+// Import the Link, useLocation, and useNavigate hooks from the react-router-dom library.
+// These hooks are used to create links between routes, access the current location, and navigate to new routes.
+import { Link, useLocation, useNavigate } from "react-router-dom";
+
+// Import the logo image from the assets/images directory.
 import logo from "../../assets/images/logo.png";
+
+// Import the ContinueWithGoogleButton component from the ContinueWithGoogleButton directory.
+// This component is used to render the "Continue with Google" button.
 import ContinueWithGoogleButton from "../../components/ContinueWithGoogleButton/ContinueWithGoogleButton";
 
+// Import the AppDataContext from the App.js file.
+// This context is used to share user and cart data between components.
+import { AppDataContext } from "../../App";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faArrowLeftLong,
+  faCircleCheck,
+} from "@fortawesome/free-solid-svg-icons";
+import { useContext, useEffect } from "react";
+
+// Define the Login component, which is a functional component.
 const Login = () => {
-  document.title = "Login | Ema John";
+  // Use the useLocation hook to access the current location.
+  // This hook returns an object with information about the current location, including the URL and any state that was passed to the location.
+  const { state } = useLocation();
+
+  // Use the useNavigate hook to access the navigate function.
+  // This hook returns a function that can be used to navigate to new routes.
+  const navigate = useNavigate();
+
+  // Use the useContext hook to access the AppDataContext.
+  // This hook allows us to access the user and cart data from the context.
+  const { user } = useContext(AppDataContext);
+
+  // Use the useEffect hook to set the document title to "Login | Ema John".
+  // This hook is used to run side effects, such as setting the document title, after the component has rendered.
+  useEffect(() => {
+    document.title = "Login | Ema John";
+  }, []);
+
+  // Use the useEffect hook to navigate to the home route if the user is already authenticated.
+  // This hook is used to run side effects, such as navigating to a new route, after the component has rendered.
+  useEffect(() => {
+    if (user) {
+      navigate(state?.from || "/");
+    }
+  }, [user, navigate]);
+  // Return the JSX that makes up the Login component.
+  // ...
   return (
     <main id="login" className="row">
       <div className="col-6" id="photo-column">

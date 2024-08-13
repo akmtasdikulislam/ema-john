@@ -1,11 +1,11 @@
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons/faShoppingCart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext } from "react";
-import { UserContext } from "../../App";
+import { AppDataContext } from "../../App";
 
 const Cart = () => {
   // eslint-disable-next-line no-unused-vars
-  const { cart } = useContext(UserContext); // Accesing cart state from context-api
+  const { cart } = useContext(AppDataContext); // Accesing cart state from context-api
 
   // Converting totalItems number into two digit numbers
   let totalItems = cart.length.toLocaleString("en-US", {

@@ -1,31 +1,25 @@
+/* eslint-disable no-unused-vars */
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import app from "../firebase.app.config";
 
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
+
+// Define a function that signs in the user with Google
 export const signInWithGoogle = () => {
-  console.log("Signing in with google");
+  console.log("Signing in with Google"); // Log a message to the console indicating that the user is signing in
+
+  // Call the signInWithPopup function with the auth and provider objects
+  // This function will open a popup window to allow the user to sign in with Google
   signInWithPopup(auth, provider)
     .then((result) => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-      // The signed-in user info.
-      const user = result.user;
-      // IdP data available using getAdditionalUserInfo(result)
-      // ...
-      console.log("User", user);
-      console.log("Token", token);
+      console.log("Sign in successful"); // Log a message to the console indicating that the sign in was successful
     })
     .catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.customData.email;
-      // The AuthCredential type that was used.
-      const credential = GoogleAuthProvider.credentialFromError(error);
-      // ...
+      const errorCode = error.code; // Get the error code from the error object
+      const errorMessage = error.message; // Get the error message from the error object
+      console.log({ errorCode, errorMessage }); // Log the error code and message to the console
+      alert(`Error: ${errorMessage}`); // Show an alert with the error message to the user
     });
 };
