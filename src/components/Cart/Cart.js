@@ -130,7 +130,13 @@ const Cart = () => {
           </tr>
         </tbody>
       </table>
-      <button onClick={() => console.log(cart)}>Proceed to Checkout</button>
+      <button
+        onClick={() => {
+          console.log(cart);
+        }}
+      >
+        Proceed to Checkout
+      </button>
     </aside>
   );
 };

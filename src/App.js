@@ -35,6 +35,10 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 // This component is used to protect routes that require authentication.
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
+// Import the ToastNotification component from the components/ToastNotification/ToastNotification module.
+// This component is used to display toast notifications to the user.
+import ToastNotification from "./components/ToastNotification/ToastNotification";
+
 // Create a new React context named AppDataContext.
 // This context will be used to share user and cart data between components.
 export const AppDataContext = createContext();
@@ -88,6 +92,17 @@ function App() {
     // Update the cart state with the retrieved cart data.
     setCart(previousCart);
   }, []);
+  // State to manage toast visibility and content
+  const [toasts, setToasts] = useState([]);
+
+  // Function to remove a specific toast
+  const removeToast = (id) => {
+    // Update the 'toasts' state by filtering out the toast with the given 'id'
+    setToasts((currentToasts) =>
+      currentToasts.filter((toast) => toast.id !== id)
+    );
+  };
+
   return (
     <AppDataContext.Provider
       value={{
@@ -95,6 +110,9 @@ function App() {
         setUser,
         cart,
         setCart,
+        toasts,
+        setToasts,
+        removeToast,
       }}
     >
       <div className="App">
@@ -117,6 +135,29 @@ function App() {
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        {/* Define a container element for toast notifications with a class name "toast-container" */}
+        <div className="toast-container">
+          {/* Map over an array of toasts, creating a new ToastNotification component for each one */}
+          {toasts.map((toast) => (
+            // Create a new ToastNotification component
+            <ToastNotification
+              // Set a unique key for the component, using the toast's id
+              key={toast.id}
+              // Pass the toast's id as a prop to the component
+              id={toast.id}
+              // Pass the toast's type as a prop to the component
+              type={toast.type}
+              // Pass the toast's title as a prop to the component
+              title={toast.title}
+              // Pass the toast's message as a prop to the component
+              message={toast.message}
+              // Pass the toast's time as a prop to the component
+              time={toast.time}
+              // Pass the toast's dynamic content as a prop to the component
+              dynamicContent={toast.dynamicContent}
+            />
+          ))}
+        </div>
       </div>
     </AppDataContext.Provider>
   );

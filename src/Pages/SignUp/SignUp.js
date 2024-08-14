@@ -5,10 +5,10 @@ import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // Import the React library and its useContext and useEffect hooks
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 // Import the Link component and useNavigate hook from the react-router-dom library
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 // Import the logo image from the ../../assets/images/logo.png file
 import logo from "../../assets/images/logo.png";
@@ -19,13 +19,38 @@ import ContinueWithGoogleButton from "../../components/ContinueWithGoogleButton/
 // Import the AppDataContext from the ../../App file
 import { AppDataContext } from "../../App";
 
+import signupBG from "../../assets/images/signup-bg.jpg";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  sendEmailVerification,
+  updateProfile,
+} from "firebase/auth";
+import { showToast } from "../../functions/showToast";
+import Loader from "../../components/Loader/Loader";
+
 // Define a functional component named SignUp
 const SignUp = () => {
   // Use the useNavigate hook to get a reference to the navigate function
   const navigate = useNavigate();
 
+  // Create a new user object.
+  const [newUser, setNewUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+    photoURL:
+      "https://res.cloudinary.com/disqpzshx/image/upload/v1723570944/xndmubs4xbbwthbmidyc.png", // Default photo URL
+  });
+
+  // Use the useLocation hook to access the current location.
+  // This hook returns an object with information about the current location, including the URL and any state that was passed to the location.
+  const { state } = useLocation();
+
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
   // Use the useContext hook to get the user object from the AppDataContext
-  const { user } = useContext(AppDataContext);
+  const { user, toasts, setToasts } = useContext(AppDataContext);
 
   // Use the useEffect hook to set the document title to "Sign up | Ema John" when the component mounts
   useEffect(() => {
@@ -33,21 +58,71 @@ const SignUp = () => {
     document.title = "Sign up | Ema John";
   }, []);
 
-  // Use the useEffect hook to navigate to the root URL when the user object changes
+  // Use the useEffect hook to navigate to the home route if the user is already authenticated.
+  // This hook is used to run side effects, such as navigating to a new route, after the component has rendered.
   useEffect(() => {
     // Check if the user object is truthy
     if (user) {
-      // Navigate to the root URL
-      navigate("/");
+      // Navigate to the previous route (if available) or the root route by default
+      navigate(state?.from || "/");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, navigate]);
+
+  // Get the authentication object.
+  const auth = getAuth();
+
+  // Define a function to handle the sign up form submission.
+  const handleSignUp = () => {
+    // Tasks performed by handleSignUp:
+    // • Set the isSubmitted state to true.
+    // • Create a new user object.
+    // • Show a toast notification with a success message.
+    // • Create a new user with the email and password.
+    // • Update the user profile with the display name and photo URL.
+    // • Send the verification email.
+    // • Show a toast notification with a success message.
+
+    // Set the isSubmitted state to true.
+    setIsSubmitted(true);
+
+    // Create a new user with the email and password.
+    createUserWithEmailAndPassword(auth, newUser.email, newUser.password)
+      .then((userCredential) => {
+        // Signed up
+        const user = userCredential.user;
+
+        // Update user profile with displayName and photoURL
+        return updateProfile(user, {
+          displayName: newUser.name,
+          photoURL: newUser.photoURL,
+        }).then(() => {
+          // Send email verification
+          return sendEmailVerification(user).then(() => {
+            // Show a toast notification with a success message.
+            showToast(
+              toasts,
+              setToasts,
+              "success",
+              "Welcome & Verify Your Email!",
+              "Your account has been created, and a verification email has been sent. Please check your inbox to verify your email address.",
+              7000
+            );
+          });
+        });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // Show a toast notification with an error message.
+        showToast(toasts, setToasts, "error", errorCode, errorMessage);
+      });
+  };
+
   return (
     <main id="sign-up" className="row">
       <div className="col-6" id="photo-column">
-        <img
-          src="https://images.unsplash.com/photo-1577587230708-187fdbef4d91?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt=""
-        />
+        <img src={signupBG} alt="" />
       </div>
       <div className="col-6" id="form-column">
         <Link to="/" className="back">
@@ -67,6 +142,9 @@ const SignUp = () => {
                 name="name"
                 id="name"
                 placeholder="Enter your full name"
+                onChange={(e) =>
+                  setNewUser({ ...newUser, name: e.target.value })
+                }
               />
               <label htmlFor="name">Fullname</label>
             </fieldset>
@@ -76,6 +154,9 @@ const SignUp = () => {
                 name="email"
                 id="email"
                 placeholder="Enter your e-mail address"
+                onChange={(e) =>
+                  setNewUser({ ...newUser, email: e.target.value })
+                }
               />
               <label htmlFor="email">E-mail Address</label>
             </fieldset>
@@ -85,11 +166,31 @@ const SignUp = () => {
                 name="password"
                 id="password"
                 placeholder="Enter password"
+                onChange={(e) =>
+                  setNewUser({ ...newUser, password: e.target.value })
+                }
               />
               <label htmlFor="password">Password</label>
             </fieldset>
           </form>
-          <button>Sign up</button>
+          {
+            // Check if isSubmitted is true
+            isSubmitted ? (
+              // If isSubmitted is true, render the following JSX
+              <button className="submiting">
+                {/* Render a Loader component */}
+                <Loader />
+                {/* Render the text "Signing up" */}
+                Signing up
+              </button>
+            ) : (
+              // If isSubmitted is false, render the following JSX
+              <button onClick={() => handleSignUp()}>
+                {/* Render a button with an onClick event handler that calls the handleSignUp function */}
+                Sign up
+              </button>
+            )
+          }
           <p className="or-text">Or</p>
           <ContinueWithGoogleButton />
           <p>

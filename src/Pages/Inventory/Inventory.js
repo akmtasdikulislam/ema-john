@@ -4,22 +4,7 @@ import Header from "../../components/Header/Header";
 import MyOrders from "../../components/MyOrders/MyOrders";
 import MyProducts from "../../components/MyProducts/MyProducts";
 import ProductCRUDForm from "../../components/ProductCRUDForm/ProductCRUDForm";
-
-// Function to open the modal
-export function openModal() {
-  const modalOverlay = document.getElementById("modalOverlay");
-  modalOverlay.style.display = "flex";
-  document.body.style.overflow = "hidden"; // Freeze scrolling
-}
-
-// Function to close the modal
-function closeModal() {
-  const modalOverlay = document.getElementById("modalOverlay");
-  modalOverlay.style.display = "none";
-  // Restore scrolling
-  document.body.style.overflow = "auto";
-  document.body.style.overflowX = "hidden";
-}
+import ModalOverlay from "../../components/ModalOverlay/ModalOverlay";
 
 const Inventory = () => {
   document.title = "Manage Inventory | Ema John";
@@ -53,20 +38,7 @@ const Inventory = () => {
   return (
     <main id="inventory">
       {/* Modal Overlay (by default Hidden.)*/}
-      <div id="modalOverlay" className="overlay">
-        <div className="confirm-delete-modal">
-          <p>Are you sure you want to delete this product?</p>
-          <div className="button-group">
-            <button className="delete-button" onClick={() => closeModal()}>
-              Confirm
-            </button>
-            <button className="neutral-button" onClick={() => closeModal()}>
-              Cancel
-            </button>
-          </div>
-        </div>
-      </div>
-
+      <ModalOverlay />
       {/* Header */}
       <Header />
 

@@ -1,17 +1,20 @@
 :root {
     /* Colors */
-    --bluish-cyan        : #1caee3;
-    --carrot-orange      : #ff8500;
-    --dark-jungle-green  : #141b25;
-    --deep-bluish-cyan   : #00b4f5;
-    --erro-color-light   : #ffcccc;
-    --error-color        : #ff1111;
-    --iceberg-blue       : #E7EEFD;
-    --success-color      : #009900;
-    --success-color-light: #ccffcc;
-
+    --bluish-cyan              : #1caee3;
+    --carrot-orange            : #ff8500;
+    --dark-jungle-green        : #141b25;
+    --deep-bluish-cyan         : #00b4f5;
+    --error-color-light        : #FFF5F5;
+    --error-color              : #E13939;
+    --iceberg-blue             : #E7EEFD;
+    --success-color            : #2F9E44;
+    --success-color-light      : #EBFBEE;
+    --warning-color            : #F08C00;
+    --warning-color-light      : #FFF9DB;
+    --informational-color      : #1971C2;
+    --informational-color-light: #E7F5FF;
     /* Base Font Size */
-    font-size: 16px;
+    font-size                  : 16px;
 }
 
 /* Common Styles */
@@ -557,6 +560,17 @@ input[type=number]::-webkit-outer-spin-button {
     width  : 100%;
 }
 
+#login #error-message {
+    width: 100%;
+}
+
+#login #email-error-message {
+    color      : var(--error-color);
+    font-weight: 600;
+    margin-top : -.5em;
+    display    : none;
+}
+
 #form-column {
     align-items    : center;
     display        : flex;
@@ -619,6 +633,10 @@ fieldset {
     display       : flex;
     flex-direction: column-reverse;
     margin-bottom : 1em;
+}
+
+fieldset.error label {
+    font-weight: 600;
 }
 
 form input,
@@ -718,7 +736,7 @@ form select:focus-within+label {
     text-align: center;
 }
 
-/* Login / Sign up with Google Button */
+/* Continue with Google Button */
 .google-button {
     background-color: white;
     border-color    : var(--iceberg-blue);
@@ -739,6 +757,22 @@ form select:focus-within+label {
 .google-button+p {
     margin: 0;
 }
+
+/* When a form is submitted and waiting for result */
+.submiting {
+    background-color: hsl(221, 45%, 85%);
+    border-color    : hsl(221, 45%, 85%);
+    color           : hsl(221, 45%, 55%);
+    cursor          : not-allowed;
+    pointer-events  : none;
+}
+
+.submiting .loader {
+    width       : 1.5em;
+    height      : 1.5em;
+    border-width: 3px;
+}
+
 
 /* UserNav component */
 .user-nav {
@@ -1062,7 +1096,7 @@ fieldset.error select {
 }
 
 #error-message {
-    background-color: var(--erro-color-light);
+    background-color: var(--error-color-light);
     color           : var(--error-color);
     display         : none;
     font-size       : 1.1em;
@@ -1094,4 +1128,217 @@ fieldset.error select {
     font-size: 2em;
     height   : calc(100vh - 7.5em);
     width    : 100%;
+}
+
+/* ToastNotification components */
+.toast-container {
+    bottom        : 1.5em;
+    display       : flex;
+    flex-direction: column;
+    gap           : 10px;
+    position      : fixed;
+    right         : 1.5em;
+    z-index       : 900;
+    width         : auto;
+    height        : auto;
+    z-index       : 1000;
+    pointer-events: auto;
+}
+
+.toast-notification {
+    border-radius  : .5em;
+    box-shadow     : 0px 16px 48px 0px rgba(0, 0, 0, 0.176);
+    color          : #fff;
+    display        : flex;
+    flex-direction : column;
+    height         : fit-content;
+    justify-content: center;
+    max-width      : 40em;
+    min-height     : 5.25em;
+    height         : auto;
+    min-width      : 30em;
+    overflow       : hidden;
+    width          : auto;
+    position       : relative;
+    padding-bottom : 1em;
+    /* Ensure the toast is positioned relative to its container */
+    z-index        : 1000;
+    /* Ensure the toast is above other elements */
+}
+
+.timer-bar {
+    animation: growBar linear;
+    height   : 5px;
+    position : absolute;
+    top      : 0;
+    width    : 100%;
+}
+
+.toast-title {
+    font-size    : 1.35em;
+    font-weight  : 700;
+    margin-bottom: .1em;
+    margin-left  : .8em;
+    margin-right : 4em;
+    margin-top   : .75em;
+}
+
+.toast-message {
+    font-size    : 500;
+    font-weight  : 600;
+    margin-right : 4em;
+    margin-bottom: 0;
+    margin-left  : 1.1em;
+}
+
+.toast-notification .close-button {
+    background: none;
+    border    : none;
+    color     : inherit;
+    cursor    : pointer;
+    font-size : 1.2em;
+    position  : absolute;
+    right     : 0;
+    top       : 50%;
+    transform : translateY(-50%);
+    z-index   : 1001;
+    /* Ensure the button is above other elements */
+}
+
+.toast-notification .resend-button {
+    text-decoration: underline;
+    cursor         : pointer;
+    font-weight    : 600;
+    font-size      : 1.1em;
+}
+
+.toast-notification .resend-button:hover {
+    text-decoration: none;
+}
+
+.toast-notification .dynamic-content p {
+    margin     : 0;
+    margin-left: 1em;
+    font-weight: 600;
+}
+
+.toast-notification.success {
+    background-color: var(--success-color-light);
+}
+
+.success .toast-title,
+.success .toast-message {
+    color: var(--success-color);
+}
+
+.success .timer-bar {
+    background-color: var(--success-color);
+}
+
+.success button svg {
+    color: var(--success-color);
+}
+
+.toast-notification.error {
+    background-color: var(--error-color-light);
+}
+
+.error .toast-title,
+.error .toast-message {
+    color: var(--error-color);
+}
+
+.error .timer-bar {
+    background-color: var(--error-color);
+}
+
+.error button svg {
+    color: var(--error-color);
+}
+
+.toast-notification.warning {
+    background-color: var(--warning-color-light);
+}
+
+.warning .toast-title,
+.warning .toast-message,
+.warning .dynamic-content p {
+    color: var(--warning-color);
+}
+
+.warning .timer-bar {
+    background-color: var(--warning-color);
+}
+
+.warning button svg {
+    color: var(--warning-color);
+}
+
+.toast-notification.info {
+    background-color: var(--informational-color-light);
+}
+
+.info .toast-title,
+.info .toast-message {
+    color: var(--informational-color);
+}
+
+.info .timer-bar {
+    background-color: var(--informational-color);
+}
+
+.info button svg {
+    color: var(--informational-color);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes growBar {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+/* Loader Component */
+.loader {
+    width              : 48px;
+    height             : 48px;
+    border             : 5px solid #FFF;
+    border-bottom-color: var(--carrot-orange);
+    border-radius      : 50%;
+    display            : inline-block;
+    box-sizing         : border-box;
+    animation          : rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }

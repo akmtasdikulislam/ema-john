@@ -1,8 +1,8 @@
 import { faPen, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { openModal } from "../../Pages/Inventory/Inventory";
 import { scrollToTop } from "../../functions/scrollToTop";
+import { openModal } from "../ModalOverlay/ModalOverlay";
 
 const ProductRecordRow = ({
   productDetails,
