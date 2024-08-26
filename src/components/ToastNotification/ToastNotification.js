@@ -1,18 +1,20 @@
-// ToastNotification.js
-import React, { useState, useEffect, useContext } from "react";
-// Import React and its dependencies, including useState, useEffect, and useContext hooks.
+/** React related imports **/
+import React, { useContext, useEffect, useState } from "react";
+// Import React and hooks for state management, side effects, and context consumption
 
 import PropTypes from "prop-types";
-// Import PropTypes library for prop type checking.
+// Import PropTypes for type-checking component props
 
+/** UI and Icon related imports **/
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// Import FontAwesomeIcon component from @fortawesome/react-fontawesome library.
+// Import FontAwesomeIcon component for rendering icons
 
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
-// Import faCircleXmark icon from @fortawesome/free-solid-svg-icons library.
+// Import specific icon (faCircleXmark) for the close button in the notification
 
+/** Context related imports **/
 import { AppDataContext } from "../../App";
-// Import AppDataContext from the App component.
+// Import AppDataContext to access global app state and functions (e.g., removeToast)
 
 const ToastNotification = ({
   id,

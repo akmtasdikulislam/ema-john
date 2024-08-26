@@ -1,21 +1,30 @@
+// ** React related imports **
+import React, { useContext, useEffect, useState } from "react"; // Core React imports for component creation and hooks
+
+// ** React Router related imports **
+import { Link } from "react-router-dom"; // For creating navigation links
+
+// ** Context imports **
+import { AppDataContext } from "../../App"; // For accessing global state
+
+// ** Fontawesome related imports **
 import {
-  faShoppingCart,
-  faStar,
-  faTrashAlt,
+  faShoppingCart, // Shopping cart icon for add to cart button
+  faStar, // Star icon for ratings
+  faTrashAlt, // Trash icon for remove from cart button
 } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { AppDataContext } from "../../App";
-import { addProductToCart } from "../../functions/addProductToCart";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // For rendering icons
 
-import { formatNumber } from "../../functions/formatNumber";
+// ** Utility function imports **
+import { formatNumber } from "../../functions/formatNumber"; // For formatting numbers (e.g., adding leading zeros)
+import { showRatingStars } from "../../functions/showRatingStars"; // For rendering star ratings
 
-import { removeProductFromCart } from "../../functions/removeProductFromCart";
-import { updateQuantityAmount } from "../../functions/updateQuantityAmount";
-import { increaseProductQuantity } from "../../functions/increaseProductQuantity";
-import { decreaseProductQuantity } from "../../functions/decreaseProductQuantity";
-import { showRatingStars } from "../../functions/showRatingStars";
+// ** Cart operation imports **
+import { addProductToCart } from "../../functions/addProductToCart"; // For adding products to the cart
+import { decreaseProductQuantity } from "../../functions/decreaseProductQuantity"; // For decreasing product quantity
+import { increaseProductQuantity } from "../../functions/increaseProductQuantity"; // For increasing product quantity
+import { removeProductFromCart } from "../../functions/removeProductFromCart"; // For removing products from the cart
+import { updateQuantityAmount } from "../../functions/updateQuantityAmount"; // For updating product quantity in the cart
 
 const Product = ({ productDetails, parent }) => {
   // Destructuring product properties.
@@ -26,10 +35,14 @@ const Product = ({ productDetails, parent }) => {
   let { stock } = productDetails;
   stock = formatNumber(stock);
 
-  // Accessing {cart and setCart} using context api
+  // Accessing cart state and its setter function from the global context
   const { cart, setCart } = useContext(AppDataContext);
+
+  // Initializing local state for quantity with a default value of 1
+  // This state will be used to manage the quantity of the product to be added to the cart
   const [quantityAmount, setQuantityAmount] = useState(1);
 
+  // ** Effects Hooks **
   useEffect(() => {
     // Update the quantity amount when the component mounts
     updateQuantityAmount(cart, key, setQuantityAmount);

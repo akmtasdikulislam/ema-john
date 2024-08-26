@@ -1,9 +1,34 @@
-// Import the getAuth function from the firebase/auth module, which returns the Firebase Authentication instance.
-import { getAuth } from "firebase/auth";
+/**
+ * PrivateRoute component
+ *
+ * This component is used to protect routes that require authentication.
+ * It checks if the user is authenticated and renders the child components if true.
+ * If the user is not authenticated, it redirects them to the login page.
+ *
+ * Props:
+ * - children: React.ReactNode
+ *   The child components to be rendered if the user is authenticated.
+ *
+ * Usage:
+ * <PrivateRoute>
+ *   <ProtectedComponent />
+ * </PrivateRoute>
+ */
 
-// Import the Navigate component and useLocation hook from the react-router-dom module.
-// Navigate is used to redirect the user to a different route, and useLocation provides the current location object.
-import { Navigate, useLocation } from "react-router-dom";
+// ** React related imports **
+import { useContext } from "react"; // Used to access the AppDataContext for authLoading state
+
+// ** React Router related imports **
+import { Navigate, useLocation } from "react-router-dom"; // Navigate for redirecting unauthenticated users, useLocation for getting current URL
+
+// ** Firebase related imports **
+import { getAuth } from "firebase/auth"; // Used to get the Firebase Authentication instance for checking user authentication status
+
+// ** Context related imports **
+import { AppDataContext } from "../../App"; // Provides access to global app data, specifically authLoading state
+
+// ** Component imports **
+import Loader from "../Loader/Loader"; // Renders a loading spinner while checking authentication state
 
 // Define a new React component named PrivateRoute, which takes a children prop.
 const PrivateRoute = ({ children }) => {
@@ -12,7 +37,19 @@ const PrivateRoute = ({ children }) => {
 
   // Use the getAuth function to get the Firebase Authentication instance.
   const auth = getAuth();
+  // Get the authLoading state from the AppDataContext
+  const { authLoading } = useContext(AppDataContext);
 
+  // If authentication is still loading, show a loading indicator
+  if (authLoading) {
+    return (
+      <div className="loader-container">
+        <Loader /> {/* Show a loading spinner while checking auth state */}
+      </div>
+    );
+  }
+
+  // Once authentication check is complete, render appropriate content
   // Return a JSX fragment that contains the conditional logic for the private route.
   return (
     <>

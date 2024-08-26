@@ -1,27 +1,23 @@
-// Import the Link, useLocation, and useNavigate hooks from the react-router-dom library.
-// These hooks are used to create links between routes, access the current location, and navigate to new routes.
-import { Link, useLocation, useNavigate } from "react-router-dom";
+/** React router related imports **/
+import { useContext, useEffect, useState } from "react"; // Hooks for managing state, side effects, and context
+import { Link, useLocation, useNavigate } from "react-router-dom"; // For creating links, accessing current location, and navigating between routes
 
-// Import the logo image from the assets/images directory.
-import logo from "../../assets/images/logo.png";
+/** Context imports **/
+import { AppDataContext } from "../../App"; // For accessing shared user and cart data
 
-// Import the ContinueWithGoogleButton component from the ContinueWithGoogleButton directory.
-// This component is used to render the "Continue with Google" button.
-import ContinueWithGoogleButton from "../../components/ContinueWithGoogleButton/ContinueWithGoogleButton";
+/** UI Component imports **/
+import ContinueWithGoogleButton from "../../components/ContinueWithGoogleButton/ContinueWithGoogleButton"; // Renders the "Continue with Google" button
+import Loader from "../../components/Loader/Loader"; // Displays a loading spinner
 
-// Import the AppDataContext from the App.js file.
-// This context is used to share user and cart data between components.
-import { AppDataContext } from "../../App";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+/** Icon imports **/
 import {
   faArrowLeftLong,
   faCircleCheck,
   faCircleExclamation,
-} from "@fortawesome/free-solid-svg-icons";
-import { useContext, useEffect, useState } from "react";
+} from "@fortawesome/free-solid-svg-icons"; // Specific icons used in the component
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // For using Font Awesome icons
 
-import loginBG from "../../assets/images/login-bg.jpg";
-import { handleInputChange, validateForm } from "../../functions/validateForm";
+/** Firebase related imports **/
 import {
   browserLocalPersistence,
   browserSessionPersistence,
@@ -29,9 +25,15 @@ import {
   sendEmailVerification,
   setPersistence,
   signInWithEmailAndPassword,
-} from "firebase/auth";
-import { showToast } from "../../functions/showToast";
-import Loader from "../../components/Loader/Loader";
+} from "firebase/auth"; // Firebase authentication functions
+
+/** Asset imports **/
+import loginBG from "../../assets/images/login-bg.jpg"; // Background image for the login page
+import logo from "../../assets/images/logo.png"; // Logo image for the login page
+
+/** Utility function imports **/
+import { showToast } from "../../functions/showToast"; // Function to display toast notifications
+import { handleInputChange, validateForm } from "../../functions/validateForm"; // Functions for form input handling and validation
 
 // Define the Login component, which is a functional component.
 const Login = () => {
@@ -186,7 +188,6 @@ const Login = () => {
     }
   };
   // Return the JSX that makes up the Login component.
-  // ...
   return (
     <main id="login" className="row">
       <div className="col-6" id="photo-column">
@@ -245,8 +246,8 @@ const Login = () => {
             <p>Please fill in all required fields before submitting.</p>
           </div>
           {isSubmitted ? (
-            <button className="submiting">
-              <Loader /> Logining in
+            <button className="submitting">
+              <Loader /> Logging in
             </button>
           ) : (
             <button onClick={() => handleLogin()}>Login</button>

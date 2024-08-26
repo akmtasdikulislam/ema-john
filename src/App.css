@@ -4,15 +4,16 @@
     --carrot-orange            : #ff8500;
     --dark-jungle-green        : #141b25;
     --deep-bluish-cyan         : #00b4f5;
-    --error-color-light        : #FFF5F5;
     --error-color              : #E13939;
+    --error-color-light        : #FFF5F5;
     --iceberg-blue             : #E7EEFD;
+    --informational-color      : #1971C2;
+    --informational-color-light: #E7F5FF;
+    --secondary-text-color     : #c8d2ea;
     --success-color            : #2F9E44;
     --success-color-light      : #EBFBEE;
     --warning-color            : #F08C00;
     --warning-color-light      : #FFF9DB;
-    --informational-color      : #1971C2;
-    --informational-color-light: #E7F5FF;
     /* Base Font Size */
     font-size                  : 16px;
 }
@@ -114,7 +115,7 @@ button:hover {
     font-weight: 600;
 }
 
-/* Input Field Aditional Indications */
+/* Input Field Additional Indications */
 .small-text {
     color      : hsl(221, 45%, 70%);
     font-size  : .75em;
@@ -186,6 +187,102 @@ main .container h1 {
     width        : 100%;
 }
 
+/* The loading indicator's container directly the child of the App component will cover the whole viewport */
+.App>.loader-container {
+    width          : 100%;
+    height         : 100vh;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+}
+
+/* HOME Page */
+#home .loader-container {
+    align-items    : center;
+    display        : flex;
+    flex-direction : column;
+    gap            : 2em;
+    height         : 100%;
+    justify-content: center;
+}
+
+.loader-container p {
+    color      : var(--secondary-text-color);
+    font-size  : 1.5em;
+    font-weight: 600;
+    margin     : 0;
+}
+
+.pagination-container {
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    height         : 2.75em;
+    width          : max-content;
+    flex-direction : row;
+    margin         : 0 auto;
+    margin-top     : 3em;
+}
+
+.pagination-container .pagination {
+    width          : 2.75em;
+    height         : 100%;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    border         : 2px solid var(--iceberg-blue);
+    border-left    : 0;
+}
+
+.pagination-container .pagination:first-of-type {
+    border-left: 2px solid var(--iceberg-blue);
+}
+
+.pagination-container.has-prev .pagination:first-of-type {
+    border-left: 0;
+}
+
+.pagination-container.has-next .pagination:last-of-type {
+    border-right: 0;
+}
+
+.pagination-container .pagination:last-of-type {
+    border-right: 2px solid var(--iceberg-blue);
+}
+
+
+.pagination-container .pagination {
+    color          : var(--secondary-text-color);
+    text-decoration: none;
+    font-weight    : 600;
+    font-size      : 1.05em;
+    transition     : all ease-in-out 0.3s;
+    cursor         : pointer;
+}
+
+.pagination-container .pagination:hover {
+    color: hsl(221, 45%, 70%);
+}
+
+.pagination-container .pagination.active {
+    color      : var(--carrot-orange);
+    font-weight: 700;
+}
+
+.pagination-container button {
+    height      : 98%;
+    padding     : 0 1.5em;
+    border-width: 2px;
+}
+
+.pagination-container button:first-child {
+    border-radius: 0.25em 0 0 0.25em;
+}
+
+.pagination-container button:last-child {
+    border-radius: 0 0.25em 0.25em 0;
+}
+
 /* PRODUCT Component */
 .product {
     align-items   : center;
@@ -194,6 +291,10 @@ main .container h1 {
     flex-direction: row;
     margin-right  : 1em;
     padding       : 1.5em 0;
+}
+
+.product .col-3 img {
+    max-width: 13em;
 }
 
 .product:first-child {
@@ -316,6 +417,14 @@ aside.cart {
 }
 
 /* PRODUCT DETAILS Component */
+#product-details>.loader-container {
+    width          : 100%;
+    height         : calc(100vh - 9em);
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+}
+
 #product-details .product img {
     padding-right: 1em;
     width        : calc(100% - 1em);
@@ -489,6 +598,12 @@ input[type=number]::-webkit-outer-spin-button {
     color      : hsl(221, 45%, 85%);
     font-weight: 600;
     margin     : 0;
+}
+
+/* Button within NotFoundErrorMessage Component */
+.not-found-error-message .try-again {
+    font-size : initial;
+    margin-top: 1em;
 }
 
 /* Customer Review Component */
@@ -759,7 +874,7 @@ form select:focus-within+label {
 }
 
 /* When a form is submitted and waiting for result */
-.submiting {
+.submitting {
     background-color: hsl(221, 45%, 85%);
     border-color    : hsl(221, 45%, 85%);
     color           : hsl(221, 45%, 55%);
@@ -767,10 +882,11 @@ form select:focus-within+label {
     pointer-events  : none;
 }
 
-.submiting .loader {
+.submitting .loader {
     width       : 1.5em;
     height      : 1.5em;
     border-width: 3px;
+    border-color: hsl(221, 45%, 85%);
 }
 
 
@@ -845,7 +961,7 @@ form select:focus-within+label {
     margin: 1em 0;
 }
 
-#feature-continaer {
+#feature-container {
     display       : flex;
     flex-direction: column;
 }
@@ -877,11 +993,23 @@ form select:focus-within+label {
     width          : 100%;
 }
 
-/* The NotFounErrorMessage container within the Inventory page will have a specific height and border */
+/* The NotFoundErrorMessage container within the Inventory page will have a specific height and border */
 #inventory .not-found-error-message {
     border       : 2.5px solid var(--iceberg-blue);
     border-radius: .25em;
     height       : 16.75em;
+}
+
+.bordered-loader-container {
+    width          : 100%;
+    border         : 2.5px solid var(--iceberg-blue);
+    border-radius  : .25em;
+    height         : 25em;
+    display        : flex;
+    flex-direction : column;
+    align-items    : center;
+    justify-content: center;
+    gap            : 2em;
 }
 
 .my-products,
@@ -921,6 +1049,7 @@ h3 {
 #inventory table th,
 #inventory table td {
     min-width      : 9em;
+    width          : fit-content;
     border-collapse: collapse;
     padding-left   : .5em;
     padding-right  : 1em;
@@ -960,7 +1089,7 @@ h3 {
 
 #inventory .product-name-image img {
     width : 3em;
-    height: 3em;
+    height: auto;
 }
 
 
@@ -968,7 +1097,7 @@ h3 {
     margin: 0;
 }
 
-/* All the Product Price will be left aligned to show them in a straigt line from top to bottom */
+/* All the Product Price will be left aligned to show them in a straight line from top to bottom */
 #inventory table tbody td.price {
     text-align  : left;
     /* As after assigning left alignment, the price goes far from its heading. That's why adding padding to left so that price amount stays directly under its heading */
@@ -979,6 +1108,12 @@ h3 {
 #inventory table tbody td.order-id {
     font-family: "Twilio Sans Mono", monospace;
     font-weight: 400;
+}
+
+/* Order Date should be shown in one line */
+#inventory table tbody td.order-date {
+    min-width: max-content;
+    padding  : 0;
 }
 
 /* In table row every products/orders action cell */
@@ -1325,7 +1460,7 @@ fieldset.error select {
 .loader {
     width              : 48px;
     height             : 48px;
-    border             : 5px solid #FFF;
+    border             : 5px solid var(--secondary-text-color);
     border-bottom-color: var(--carrot-orange);
     border-radius      : 50%;
     display            : inline-block;

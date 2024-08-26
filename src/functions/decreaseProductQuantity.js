@@ -1,40 +1,39 @@
-import { addProductToCart } from "./addProductToCart";
+// ** Cart-related function imports **
+import { addProductToCart } from "./addProductToCart"; // Import function to add or update product in cart, used when decreasing quantity
 
 // This function decreases the quantity of a product in the shopping cart
 export const decreaseProductQuantity = ({
-  // 'currentCart' is an array of products that are currently in the shopping cart
-  currentCart,
-  // 'productInfo' is an object that contains information about the product being added to the cart
-  productInfo,
-  // 'currentQuantity' is the number of products being added to the cart
-  currentQuantity,
-  // 'updateCart' is a function that updates the shopping cart with new products
-  updateCart,
-  // 'updateQuantity' is a function that updates the quantity of products being added to the cart
-  updateQuantity,
-  // 'shouldAddToCart' is a variable that determines whether the product should be added to the cart
-  shouldAddToCart,
+  /*
+   * Description:
+   * This function handles the process of decreasing the quantity of a product in the shopping cart.
+   * It updates the quantity and, if necessary, modifies the cart contents.
+   *
+   * Task List:
+   * • Check if the current quantity is greater than 1
+   * • Decrease the quantity by 1
+   * • Update the cart if required
+   * • Call addProductToCart function with updated information if necessary
+   */
+  currentCart, // Array of products currently in the shopping cart
+  productInfo, // Object containing information about the product being modified
+  currentQuantity, // Current quantity of the product in the cart
+  updateCart, // Function to update the shopping cart with new products
+  updateQuantity, // Function to update the quantity of products in the cart
+  shouldAddToCart, // Boolean flag indicating whether the product should be added to the cart
 }) => {
-  // If the quantity of the product is greater than 1, decrease it by 1
   if (currentQuantity > 1) {
-    // Decrease the quantity of products being added to the cart by 1
-    updateQuantity(currentQuantity - 1);
+    // Check if the quantity is greater than 1 to allow decrease
+    updateQuantity(currentQuantity - 1); // Decrease the quantity by 1 and update
 
-    // If the product should be added to the cart, call the 'addProductToCart' function
     if (shouldAddToCart) {
-      // Call the 'addProductToCart' function with the necessary parameters
-      // This function will add the product to the shopping cart and update the cart with the new product
+      // Check if the product should be added/updated in the cart
       addProductToCart({
-        // Pass the current shopping cart to the 'addProductToCart' function
-        currentCart,
-        // Pass the function that updates the shopping cart to the 'addProductToCart' function
-        updateCart,
-        // Pass the product information to the 'addProductToCart' function
-        productInfo,
-        // Pass the quantity of products being added to the cart to the 'addProductToCart' function
-        currentQuantity,
-        // Tell the 'addProductToCart' function to decrease the quantity of products
-        shouldDecreaseQuantity: true,
+        // Call addProductToCart function to update the cart
+        currentCart, // Pass the current cart state
+        updateCart, // Pass the function to update the cart
+        productInfo, // Pass the product information
+        currentQuantity, // Pass the current quantity (before decrease)
+        shouldDecreaseQuantity: true, // Indicate that quantity should be decreased
       });
     }
   }

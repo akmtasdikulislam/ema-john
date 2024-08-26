@@ -1,38 +1,36 @@
-// Import the faArrowLeftLong icon from the @fortawesome/free-solid-svg-icons library
-import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
+/** React and React Router related imports **/
+import React, { useContext, useEffect, useState } from "react"; // Import React and hooks for state management and side effects
+import { Link, useLocation, useNavigate } from "react-router-dom"; // Import routing components for navigation
 
-// Import the FontAwesomeIcon component from the @fortawesome/react-fontawesome library
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+/** Context related imports **/
+import { AppDataContext } from "../../App"; // Import context for global app data
 
-// Import the React library and its useContext and useEffect hooks
-import React, { useContext, useEffect, useState } from "react";
-
-// Import the Link component and useNavigate hook from the react-router-dom library
-import { Link, useLocation, useNavigate } from "react-router-dom";
-
-// Import the logo image from the ../../assets/images/logo.png file
-import logo from "../../assets/images/logo.png";
-
-// Import the ContinueWithGoogleButton component from the ../../components/ContinueWithGoogleButton/ContinueWithGoogleButton file
-import ContinueWithGoogleButton from "../../components/ContinueWithGoogleButton/ContinueWithGoogleButton";
-
-// Import the AppDataContext from the ../../App file
-import { AppDataContext } from "../../App";
-
-import signupBG from "../../assets/images/signup-bg.jpg";
+/** Firebase related imports **/
 import {
   createUserWithEmailAndPassword,
   getAuth,
   sendEmailVerification,
   updateProfile,
-} from "firebase/auth";
-import { showToast } from "../../functions/showToast";
-import Loader from "../../components/Loader/Loader";
+} from "firebase/auth"; // Import Firebase authentication functions
+
+/** UI Component imports **/
+import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons"; // Import specific icon for back navigation
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import FontAwesome component for icons
+import ContinueWithGoogleButton from "../../components/ContinueWithGoogleButton/ContinueWithGoogleButton"; // Import Google sign-in button component
+import Loader from "../../components/Loader/Loader"; // Import loading indicator component
+
+/** Asset imports **/
+import logo from "../../assets/images/logo.png"; // Import logo image for branding
+import signupBG from "../../assets/images/signup-bg.jpg"; // Import background image for signup page
+
+/** Utility imports **/
+import { showToast } from "../../functions/showToast"; // Import toast notification function
 
 // Define a functional component named SignUp
 const SignUp = () => {
-  // Use the useNavigate hook to get a reference to the navigate function
-  const navigate = useNavigate();
+  //====================//
+  //  STATE AND EFFECTS //
+  //====================//
 
   // Create a new user object.
   const [newUser, setNewUser] = useState({
@@ -42,12 +40,14 @@ const SignUp = () => {
     photoURL:
       "https://res.cloudinary.com/disqpzshx/image/upload/v1723570944/xndmubs4xbbwthbmidyc.png", // Default photo URL
   });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // Use the useNavigate hook to get a reference to the navigate function
+  const navigate = useNavigate();
 
   // Use the useLocation hook to access the current location.
   // This hook returns an object with information about the current location, including the URL and any state that was passed to the location.
   const { state } = useLocation();
-
-  const [isSubmitted, setIsSubmitted] = useState(false);
 
   // Use the useContext hook to get the user object from the AppDataContext
   const { user, toasts, setToasts } = useContext(AppDataContext);
@@ -68,6 +68,10 @@ const SignUp = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, navigate]);
+
+  //====================//
+  //  HELPER FUNCTIONS   //
+  //====================//
 
   // Get the authentication object.
   const auth = getAuth();
@@ -146,7 +150,7 @@ const SignUp = () => {
                   setNewUser({ ...newUser, name: e.target.value })
                 }
               />
-              <label htmlFor="name">Fullname</label>
+              <label htmlFor="name">Full Name</label>
             </fieldset>
             <fieldset>
               <input
@@ -177,7 +181,7 @@ const SignUp = () => {
             // Check if isSubmitted is true
             isSubmitted ? (
               // If isSubmitted is true, render the following JSX
-              <button className="submiting">
+              <button className="submitting">
                 {/* Render a Loader component */}
                 <Loader />
                 {/* Render the text "Signing up" */}

@@ -1,41 +1,35 @@
-// This function is used to add products to the shopping cart
+/** Cart-related imports */
+import { addProductToCart } from "./addProductToCart"; // Function to add or update a product in the cart, used when increasing quantity of a product that's not yet in the cart
 
-// Import the function 'addToCart' from another file called 'addToCart.js'
-import { addProductToCart } from "./addProductToCart";
-
-// Export a new function called 'increaseProductQuantity' that can be used by other parts of the program
 export const increaseProductQuantity = ({
-  // 'currentCart' is an array of products that are currently in the shopping cart
-  currentCart,
-  // 'productInfo' is an object that contains information about the product being added to the cart
-  productInfo,
-  // 'currentQuantity' is the number of products being added to the cart
-  currentQuantity,
-  // 'updateCart' is a function that updates the shopping cart with new products
-  updateCart,
-  // 'updateQuantity' is a function that updates the quantity of products being added to the cart
-  updateQuantity,
-  // 'shouldAddToCart' is a variable that determines whether the product should be added to the cart
-  shouldAddToCart,
+  /*
+   * This function increases the quantity of a product in the shopping cart.
+   * It also adds the product to the cart if it's not already present.
+   * 
+   * Task list:
+   * • Update the quantity of the product
+   * • Check if the product should be added to the cart
+   * • Add the product to the cart if necessary
+   */
+  currentCart, // Array of products currently in the shopping cart
+  productInfo, // Object containing information about the product being added
+  currentQuantity, // Current quantity of the product in the cart
+  updateCart, // Function to update the shopping cart with new products
+  updateQuantity, // Function to update the quantity of products in the cart
+  shouldAddToCart, // Boolean indicating whether the product should be added to the cart
 }) => {
-  // Increase the quantity of products being added to the cart by 1
+  // Increment the quantity of the product by 1
   updateQuantity(currentQuantity + 1);
 
-  // If the product should be added to the cart, call the 'addProductToCart' function
+  // Check if the product should be added to the cart
   if (shouldAddToCart) {
-    // Call the 'addProductToCart' function with the necessary parameters
-    // This function will add the product to the shopping cart and update the cart with the new product
+    // Add the product to the cart or update its quantity if already present
     addProductToCart({
-      // Pass the current shopping cart to the 'addProductToCart' function
-      currentCart,
-      // Pass the function that updates the shopping cart to the 'addProductToCart' function
-      updateCart,
-      // Pass the product information to the 'addProductToCart' function
-      productInfo,
-      // Pass the quantity of products being added to the cart to the 'addProductToCart' function
-      currentQuantity,
-      // Tell the 'addProductToCart' function to increase the quantity of products
-      shouldIncreaseQuantity: true,
+      currentCart, // Pass the current state of the shopping cart
+      updateCart, // Function to update the cart state
+      productInfo, // Information about the product to be added
+      currentQuantity, // Current quantity of the product
+      shouldIncreaseQuantity: true, // Indicate that the quantity should be increased
     });
   }
 };

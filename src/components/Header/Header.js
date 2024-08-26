@@ -1,28 +1,22 @@
-// Import the React library, which is the foundation of the React framework.
-import React, { useContext } from "react";
+// ** React related imports **
+import React, { useContext } from "react"; // Import the React library, which is the foundation of the React framework.
 
-// Import the Link and NavLink components from the react-router-dom library.
-// These components are used to create links between routes in the app.
-import { Link, NavLink } from "react-router-dom";
+// ** React Router related imports **
+import { Link, NavLink } from "react-router-dom"; // Import the Link and NavLink components from the react-router-dom library. These components are used to create links between routes in the app.
 
-// Import the logo image from the assets/images directory.
-import logo from "../../assets/images/logo-inverted.png";
+// ** Font Awesome related imports **
 
-// Import the UserNav component from the UserNav directory.
-// This component is used to render the user navigation menu.
-import UserNav from "../UserNav/UserNav";
+import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons"; // Import the faArrowRightFromBracket icon from the @fortawesome/free-solid-svg-icons library. This icon is used to render the sign in button.
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import the FontAwesomeIcon component from the @fortawesome/react-fontawesome library. This component is used to render icons from the Font Awesome library.
 
-// Import the FontAwesomeIcon component from the @fortawesome/react-fontawesome library.
-// This component is used to render icons from the Font Awesome library.
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// ** Context import **
+import { AppDataContext } from "../../App"; // Import the AppDataContext from the App.js file. This context is used to share user and cart data between components.
 
-// Import the faArrowRightFromBracket icon from the @fortawesome/free-solid-svg-icons library.
-// This icon is used to render the sign in button.
-import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+// ** Image imports **
+import logo from "../../assets/images/logo-inverted.png"; // Import the logo image from the assets/images directory.
 
-// Import the AppDataContext from the App.js file.
-// This context is used to share user and cart data between components.
-import { AppDataContext } from "../../App";
+// ** Component imports **
+import UserNav from "../UserNav/UserNav"; // Import the UserNav component from the UserNav directory. This component is used to render the user navigation menu.
 
 // Define the Header component, which is a functional component.
 const Header = () => {

@@ -1,6 +1,6 @@
-import React from "react";
-import google from "../../assets/images/google.svg";
-import { signInWithGoogle } from "../../functions/signInWithGoogle";
+import React from "react"; // Import React library to use JSX and create React components
+import google from "../../assets/images/google.svg"; // Import the Google logo SVG file to use as an icon in the button
+import { signInWithGoogle } from "../../functions/signInWithGoogle"; // Import the signInWithGoogle function to handle Google authentication
 
 const ContinueWithGoogleButton = () => {
   return (
