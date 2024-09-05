@@ -896,12 +896,11 @@ form select:focus-within+label {
 }
 
 .disabled-button .loader {
-    width       : 1.5em;
-    height      : 1.5em;
-    border-width: 3px;
-    border-color: hsl(221, 45%, 85%);
+    width              : 1.5em;
+    height             : 1.5em;
+    border             : 3px solid var(--iceberg-blue);
+    border-bottom-color: var(--carrot-orange);
 }
-
 
 /* UserNav component */
 .user-nav {
