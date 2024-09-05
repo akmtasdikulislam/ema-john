@@ -206,6 +206,15 @@ main .container h1 {
     justify-content: center;
 }
 
+#checkout .loader-container {
+    align-items    : center;
+    display        : flex;
+    flex-direction : column;
+    height         : calc(100vh - 20em);
+    justify-content: center;
+    width          : 100%;
+}
+
 .loader-container p {
     color      : var(--secondary-text-color);
     font-size  : 1.5em;
@@ -606,6 +615,10 @@ input[type=number]::-webkit-outer-spin-button {
     margin-top: 1em;
 }
 
+#checkout .not-found-error-message {
+    margin-top: 5em;
+}
+
 /* Customer Review Component */
 .customer-review {
     padding: 1em 0;
@@ -874,7 +887,7 @@ form select:focus-within+label {
 }
 
 /* When a form is submitted and waiting for result */
-.submitting {
+.disabled-button {
     background-color: hsl(221, 45%, 85%);
     border-color    : hsl(221, 45%, 85%);
     color           : hsl(221, 45%, 55%);
@@ -882,7 +895,7 @@ form select:focus-within+label {
     pointer-events  : none;
 }
 
-.submitting .loader {
+.disabled-button .loader {
     width       : 1.5em;
     height      : 1.5em;
     border-width: 3px;
@@ -1424,6 +1437,65 @@ fieldset.error select {
 
 .info button svg {
     color: var(--informational-color);
+}
+
+/* Checkout Page */
+#checkout .form_container {
+    margin: 0 auto;
+    width : 50em;
+}
+
+#checkout .form_container h4 {
+    margin-bottom: 1em;
+}
+
+#checkout .form_container button {
+    margin    : 0 auto;
+    margin-top: 2em;
+}
+
+/* PaymentSuccess COMPONENT */
+#payment-success-container {
+    align-items    : center;
+    display        : flex;
+    height         : calc(100vh - 10em);
+    justify-content: center;
+    width          : 100%;
+}
+
+#payment-success {
+    align-items    : center;
+    display        : flex;
+    flex-direction : column;
+    height         : 20em;
+    justify-content: center;
+    margin         : auto;
+    width          : 30em;
+}
+
+#payment-success .success-icon {
+    color    : var(--success-color);
+    font-size: 5em;
+}
+
+#payment-success p {
+    font-size : 1.15em;
+    text-align: center;
+}
+
+#payment-success .secondary-text {
+    color      : hsl(221, 45%, 70%);
+    font-weight: 500;
+    margin     : auto;
+    width      : 90%;
+}
+
+#payment-success a {
+    text-decoration: none;
+}
+
+#payment-success button {
+    margin-top: 1.25em;
 }
 
 @keyframes fadeIn {

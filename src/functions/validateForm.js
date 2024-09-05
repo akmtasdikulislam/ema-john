@@ -102,24 +102,31 @@ export const validateForm = () => {
     "email-error-message"
   );
 
-  // Check if the email input field has a value
-  if (emailInputField.value !== "") {
-    // Validate the email address
-    if (!validateEmail(emailInputField.value)) {
-      // Add the "error" class to the parent element of the email input field
-      emailInputField.parentNode.classList.add("error");
+  // Check if the email input field exists
+  if (emailInputField) {
+    // Check if the email input field has a value
+    if (emailInputField.value !== "") {
+      // Ensure the email field is not empty
+      // Validate the email address
+      if (!validateEmail(emailInputField.value)) {
+        // Check if the email is invalid
+        // Add the "error" class to the parent element of the email input field
+        emailInputField.parentNode.classList.add("error"); // Highlight the field as erroneous
 
-      // Display the email error message
-      invalidEmailErrorMessage.style.display = "flex";
-    } else {
-      // Remove the "error" class from the parent element of the email input field
-      emailInputField.parentNode.classList.remove("error");
+        // Display the email error message
+        invalidEmailErrorMessage.style.display = "flex"; // Show the error message
+      } else {
+        // Remove the "error" class from the parent element of the email input field
+        emailInputField.parentNode.classList.remove("error"); // Remove error highlight
 
-      // Hide the email error message
-      invalidEmailErrorMessage.style.display = "none";
+        // Hide the email error message
+        invalidEmailErrorMessage.style.display = "none"; // Hide the error message
+      }
     }
   }
 
   // Return true if the form is valid, false otherwise
-  return emptyFormFields.length === 0 && validateEmail(emailInputField.value);
+  return emailInputField
+    ? emptyFormFields.length === 0 && validateEmail(emailInputField.value) // If email field exists, check for empty fields and valid email
+    : emptyFormFields.length === 0; // If no email field, only check for empty fields
 };

@@ -246,7 +246,7 @@ const Login = () => {
             <p>Please fill in all required fields before submitting.</p>
           </div>
           {isSubmitted ? (
-            <button className="submitting">
+            <button className="disabled-button" disabled>
               <Loader /> Logging in
             </button>
           ) : (

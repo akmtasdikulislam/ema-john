@@ -28,6 +28,7 @@ import { getDatabaseCart } from "./assets/utilities/databaseManager";
 // Import various page components from the Pages directory.
 // These components are used to render different pages in the app.
 
+import Checkout from "./Pages/Checkout/Checkout"; // Import the Checkout component to handle the checkout process and display the checkout page
 import Home from "./Pages/Home/Home"; // Import the Home component to render the home page of the application
 import Inventory from "./Pages/Inventory/Inventory"; // Import the Inventory component to display and manage product inventory
 import Login from "./Pages/Login/Login"; // Import the Login component to handle user authentication and login functionality
@@ -45,6 +46,7 @@ import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 // Import the ToastNotification component from the components/ToastNotification/ToastNotification module.
 // This component is used to display toast notifications to the user.
 import ToastNotification from "./components/ToastNotification/ToastNotification";
+import { calculateCart } from "./functions/calculateCart";
 
 // Create a new React context named AppDataContext.
 // This context will be used to share user and cart data between components.
@@ -72,6 +74,7 @@ function App() {
 
   // Cart-related state
   const [cart, setCart] = useState([]); // This state variable will store the cart data.
+  const [totalCartPrice, setTotalCartPrice] = useState(0); // This state variable will store the total cost/price of the cart.
 
   // Toast notification state
   const [toasts, setToasts] = useState([]); // This state variable will manage toast visibility and content
@@ -132,7 +135,21 @@ function App() {
       // Update the cart state with the retrieved cart data
       setCart(previousCart);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isProductsLoaded, products]);
+
+  // This useEffect runs whenever the cart changes
+  useEffect(() => {
+    // Check if products are loaded before calculating cart total
+    if (isProductsLoaded) {
+      // Calculate the grand total of the cart using the calculateCart function
+      const { grandTotal } = calculateCart(cart);
+
+      // Update the total cart price in the global state with the calculated grand total
+      setTotalCartPrice(grandTotal);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cart]); // Re-run effect when cart changes
 
   // ** Helper functions **
 
@@ -246,6 +263,8 @@ function App() {
         toBeDeletedProductId, // ID of the product that is about to be deleted
         toasts, // Array of current toast notifications
         user, // Object containing current user information
+        totalCartPrice, // Total price of items in the cart
+        setTotalCartPrice, // Function to update the totalCartPrice state
       }}
     >
       <div className="App">
@@ -284,6 +303,15 @@ function App() {
           <Route path="/login" element={<Login />} />
           {/* Route for sign-up page */}
           <Route path="/sign-up" element={<SignUp />} />
+          {/* Route for the checkout page */}
+          <Route
+            path="/checkout"
+            element={
+              <PrivateRoute>
+                <Checkout />
+              </PrivateRoute>
+            }
+          />
           {/* Catch-all route for undefined paths */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -7,10 +7,10 @@ import { AppDataContext } from "../../App"; // Import context for global app dat
 
 /** Firebase related imports **/
 import {
-  createUserWithEmailAndPassword,
-  getAuth,
-  sendEmailVerification,
-  updateProfile,
+    createUserWithEmailAndPassword,
+    getAuth,
+    sendEmailVerification,
+    updateProfile,
 } from "firebase/auth"; // Import Firebase authentication functions
 
 /** UI Component imports **/
@@ -181,7 +181,7 @@ const SignUp = () => {
             // Check if isSubmitted is true
             isSubmitted ? (
               // If isSubmitted is true, render the following JSX
-              <button className="submitting">
+              <button className="disabled-button">
                 {/* Render a Loader component */}
                 <Loader />
                 {/* Render the text "Signing up" */}
