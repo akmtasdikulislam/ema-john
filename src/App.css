@@ -1578,3 +1578,75 @@ fieldset.error select {
         transform: rotate(360deg);
     }
 }
+
+/* Responsiveness */
+@media only screen and (max-width: 1024px) {
+    #large-screen {
+        display: none;
+    }
+
+    #small-screen {
+        display: flex;
+    }
+
+    .container {
+        width: 95%;
+    }
+
+    header #small-screen .logo-menu {
+        align-items    : center;
+        display        : flex;
+        flex-direction : row;
+        justify-content: center;
+        position       : relative;
+        width          : 100%;
+    }
+
+    header #small-screen .logo-menu .nav-menu-icon {
+        color    : white;
+        font-size: 1.35em;
+        position : absolute;
+        right    : 0;
+    }
+
+    header #small-screen .logo-menu .nav-menu-icon:hover {
+        color     : var(--carrot-orange);
+        cursor    : pointer;
+        transition: all ease-in-out .3s;
+    }
+
+    header #small-screen #nav-sidebar {
+        align-items     : flex-start;
+        background-color: #141b25;
+        display         : none;
+        flex-direction  : column;
+        gap             : 2em;
+        height          : 100vh;
+        left            : -100%;
+        padding-left    : 2.5em;
+        position        : absolute;
+        top             : 0;
+        transition      : all ease-in-out .75s;
+        width           : 35%;
+        z-index         : 9;
+    }
+
+    header #small-screen #nav-sidebar .close-icon {
+        color    : white;
+        font-size: 1.35em;
+        position : absolute;
+        right    : 1.5em;
+        top      : 2.25em;
+    }
+
+    header #small-screen #dimmed-bg {
+        background-color: rgba(0, 0, 0, 0.5);
+        display         : none;
+        height          : 100%;
+        left            : 0;
+        position        : absolute;
+        top             : 0;
+        width           : 100%;
+        z-index         : 1;
+    }
+}
