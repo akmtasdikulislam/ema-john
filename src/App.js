@@ -46,7 +46,12 @@ import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 // Import the ToastNotification component from the components/ToastNotification/ToastNotification module.
 // This component is used to display toast notifications to the user.
 import ToastNotification from "./components/ToastNotification/ToastNotification";
+
+// Import the calculateCart function from the calculateCart module to handle cart calculations
 import { calculateCart } from "./functions/calculateCart";
+
+// Import the Search component from the Search module to render the search functionality
+import Search from "./Pages/Search/Search";
 
 // Create a new React context named AppDataContext.
 // This context will be used to share user and cart data between components.
@@ -311,6 +316,14 @@ function App() {
                 <Checkout />
               </PrivateRoute>
             }
+          />
+          {/* Route for the product search page */}
+          <Route path="/search" element={<Search />} />
+          {/* Route for the paginated search results */}
+          <Route
+            exact // Ensures this route matches exactly
+            path="/search/:pageNumber?" // Defines the URL pattern with a dynamic pageNumber parameter
+            element={<Search />} // Renders the Search component when this route is matched
           />
           {/* Catch-all route for undefined paths */}
           <Route path="*" element={<NotFound />} />
