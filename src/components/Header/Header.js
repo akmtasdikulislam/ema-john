@@ -40,29 +40,39 @@ const Header = ({ searchParams }) => {
     searchParams && setSearchQuery(searchParams);
   }, [searchParams]); // Dependency array: re-run effect when searchParams changes
 
+  // ** Helper Function **
+
   // Function to open the sidebar
   const openSidebar = () => {
     /*
-    This function is responsible for opening the sidebar navigation menu and displaying a dimmed background.
+      This function is responsible for opening the sidebar navigation menu, displaying a dimmed background,
+      and preventing scrolling on the main body.
 
-    Task List:
-    • Get the sidebar element
-    • Display the sidebar
-    • Animate the sidebar's position
-    • Get the dimmed background element
-    • Display the dimmed background
-    */
+      Task List:
+      • Get the sidebar and user navigation elements
+      • Prevent scrolling on the main body
+      • Display the sidebar and user navigation
+      • Animate the sidebar and user navigation positions
+      • Get the dimmed background element
+      • Display the dimmed background
+      */
 
-    // Get the sidebar element by its ID
-    const sidebar = document.getElementById("nav-sidebar");
+    // Get the sidebar and user navigation elements by their IDs
+    const navMenu = document.getElementById("nav-menu");
+    const userStatus = document.getElementById("user-status");
+
+    // Prevent scrolling on the main body
+    document.body.style.maxHeight = "100vh";
+    document.body.style.overflowY = "hidden";
 
     // Set the sidebar's display style to "flex" to make it visible
-    sidebar.style.display = "flex";
+    navMenu.style.display = "flex";
 
-    // Use setTimeout to create a small delay before animating the sidebar
+    // Use setTimeout to create a small delay before animating the sidebar and user navigation
     setTimeout(() => {
-      // Animate the sidebar's position by setting its left style to "0%"
-      sidebar.style.left = "0%";
+      // Animate the sidebar and user navigation positions by setting their left style to "0"
+      navMenu.style.left = 0;
+      userStatus.style.left = 0;
     }, 1);
 
     // Get the dimmed background element by its ID
@@ -75,26 +85,34 @@ const Header = ({ searchParams }) => {
   // Function to close the sidebar
   const closeSidebar = () => {
     /*
-    This function is responsible for closing the sidebar navigation menu and hiding the dimmed background.
+      This function is responsible for closing the sidebar navigation menu, hiding the dimmed background,
+      and restoring scrolling on the main body.
 
-    Task List:
-    • Get the sidebar element
-    • Animate the sidebar's position off-screen
-    • Hide the sidebar after animation
-    • Get the dimmed background element
-    • Hide the dimmed background
-    */
+      Task List:
+      • Get the sidebar and user navigation elements
+      • Restore scrolling on the main body
+      • Animate the sidebar and user navigation positions off-screen
+      • Hide the sidebar after animation
+      • Get the dimmed background element
+      • Hide the dimmed background
+      */
 
-    // Get the sidebar element by its ID
-    const sidebar = document.getElementById("nav-sidebar");
+    // Get the sidebar and user navigation elements by their IDs
+    const navMenu = document.getElementById("nav-menu");
+    const userStatus = document.getElementById("user-status");
 
-    // Animate the sidebar's position by setting its left style to "-100%"
-    sidebar.style.left = "-100%";
+    // Restore scrolling on the main body
+    document.body.style.overflowY = "auto";
+    document.body.style.maxHeight = "";
+
+    // Animate the sidebar and user navigation positions by setting their left style to "-25em"
+    navMenu.style.left = "-25em";
+    userStatus.style.left = "-25em";
 
     // Use setTimeout to hide the sidebar after the animation completes
     setTimeout(() => {
       // Set the sidebar's display style to "none" to hide it
-      sidebar.style.display = "none";
+      navMenu.style.display = "none";
     }, 1000);
 
     // Get the dimmed background element by its ID
@@ -108,38 +126,51 @@ const Header = ({ searchParams }) => {
   return (
     // The header element is the root element of the Header component.
     <header>
-      {/* The container element is used to wrap the header content. */}
       <div className="container" id="large-screen">
         <div className="nav-bar">
           {/* The logo element is used to render the logo image. */}
           <img className="logo" src={logo} alt="ema-john Logo" />
 
           {/* The nav element is used to render the navigation menu. */}
-          <nav>
+          <nav id="nav-menu">
             {/* The NavLink component is used to create a link to the home route. */}
             <NavLink to="/">Home</NavLink>
             {/* The NavLink component is used to create a link to the order review route. */}
             <NavLink to="/order/review">Order Review</NavLink>
             {/* The NavLink component is used to create a link to the inventory route. */}
             <NavLink to="/inventory">Manage Inventory</NavLink>
+            <FontAwesomeIcon
+              icon={faXmark}
+              className="icon close-icon"
+              onClick={closeSidebar}
+            />
           </nav>
 
           {/* The sign in button and user navigation menu are conditionally rendered based on the user's authentication status. */}
-          {user?.uid ? (
-            // If the user is authenticated, render the UserNav component.
-            <UserNav />
-          ) : (
-            // If the user is not authenticated, render the sign in button.
-            <Link className="link" to={"/login"}>
-              {/* The button element is used to render the sign in button. */}
-              <button id="sign-in">
-                {/* The FontAwesomeIcon component is used to render the sign in icon. */}
-                <FontAwesomeIcon icon={faArrowRightFromBracket} />
-                {/* The text "Sign in" is rendered inside the button. */}
-                Sign in
-              </button>
-            </Link>
-          )}
+          <div id="user-status">
+            {user?.uid ? (
+              // If the user is authenticated, render the UserNav component.
+              <UserNav />
+            ) : (
+              // If the user is not authenticated, render the sign in button.
+              <Link id="sign-in-button" className="link" to={"/login"}>
+                {/* The button element is used to render the sign in button. */}
+                <button id="sign-in">
+                  {/* The FontAwesomeIcon component is used to render the sign in icon. */}
+                  <FontAwesomeIcon icon={faArrowRightFromBracket} />
+                  {/* The text "Sign in" is rendered inside the button. */}
+                  Sign in
+                </button>
+              </Link>
+            )}
+          </div>
+
+          {/* The button element is used to render the menu icon. */}
+          <FontAwesomeIcon
+            className="icon nav-menu-icon"
+            icon={faBars}
+            onClick={openSidebar}
+          />
         </div>
         <div className="search-bar">
           <input
@@ -157,57 +188,8 @@ const Header = ({ searchParams }) => {
           </Link>
         </div>
       </div>
-      {/* Small Screen */}
-      <div className="container" id="small-screen">
-        <div className="logo-menu">
-          {/* The logo element is used to render the logo image. */}
-          <img className="logo" src={logo} alt="ema-john Logo" />
 
-          {/* The button element is used to render the menu icon. */}
-          <FontAwesomeIcon
-            className="nav-menu-icon"
-            icon={faBars}
-            onClick={openSidebar}
-          />
-        </div>
-
-        <div className="search-bar">
-          <input
-            type="text"
-            name="search"
-            id="search"
-            placeholder="Find products..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          <Link to={`/search?q=${searchQuery}`}>
-            <button type="submit">
-              <FontAwesomeIcon icon={faSearch} /> <span>Search</span>
-            </button>
-          </Link>
-        </div>
-      </div>
-
-      <nav id="nav-sidebar">
-        <FontAwesomeIcon
-          icon={faXmark}
-          className="close-icon"
-          onClick={closeSidebar}
-        />
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/order/review">Order Review</NavLink>
-        <NavLink to="/inventory">Manage Inventory</NavLink>
-        {user?.uid ? (
-          <UserNav />
-        ) : (
-          <Link className="link" to={"/login"}>
-            <button id="sign-in">
-              <FontAwesomeIcon icon={faArrowRightFromBracket} />
-              Sign in
-            </button>
-          </Link>
-        )}
-      </nav>
+      {/* Dimmed Overlay BG */}
       <div id="dimmed-bg"></div>
     </header>
   );

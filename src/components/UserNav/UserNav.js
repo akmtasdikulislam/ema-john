@@ -56,7 +56,7 @@ const UserNav = () => {
   };
   // Render the UserNav component
   return (
-    <div className="row user-nav">
+    <div className="row user-nav" id="user-nav">
       <div className="col-4 user-photo">
         <img src={photoURL} alt={displayName} />
       </div>
