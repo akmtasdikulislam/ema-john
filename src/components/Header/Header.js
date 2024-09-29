@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useState } from "react"; // Import the React library, which is the foundation of the React framework.
 
 // ** React Router related imports **
-import { Link, NavLink } from "react-router-dom"; // Import the Link and NavLink components from the react-router-dom library. These components are used to create links between routes in the app.
+import { Link, NavLink, useNavigate } from "react-router-dom"; // Import the Link and NavLink components from the react-router-dom library. These components are used to create links between routes in the app.
 
 // ** Font Awesome related imports **
 
@@ -34,13 +34,46 @@ const Header = ({ searchParams }) => {
   // useState("") initializes the searchQuery with an empty string
   const [searchQuery, setSearchQuery] = useState("");
 
+  const navigate = useNavigate(); // Initialize the navigate function from react-router-dom to enable programmatic navigation between routes
+
   // Effect hook to update searchQuery when searchParams changes
   useEffect(() => {
     // If searchParams exists, update searchQuery state with its value
     searchParams && setSearchQuery(searchParams);
   }, [searchParams]); // Dependency array: re-run effect when searchParams changes
 
+  // Effect hook To ensure the dimmed background is always removed when navigating, we can add an effect that runs on component mount and unmount
+  useEffect(() => {
+    // Return a cleanup function to be executed when the component unmounts
+    return () => {
+      // Get the element with id "dimmed-bg"
+      const dimmedBG = document.getElementById("dimmed-bg");
+      // If the dimmed background element exists
+      if (dimmedBG) {
+        // Hide the dimmed background
+        dimmedBG.style.display = "none";
+      }
+      // Enable vertical scrolling on the body
+      document.body.style.overflowY = "auto";
+      // Remove any max-height restriction on the body
+      document.body.style.maxHeight = "";
+    };
+  }, []); // Empty dependency array means this effect runs only on mount and unmount
+
   // ** Helper Function **
+
+  const handleNavigation = (path) => {
+    /*
+    This function handles navigation to a specified path while ensuring the sidebar is closed.
+
+    Task List:
+    • Close the sidebar
+    • Navigate to the specified path
+    */
+
+    closeSidebar(); // Close the sidebar before navigation
+    navigate(path); // Use the navigate function to go to the specified path
+  };
 
   // Function to open the sidebar
   const openSidebar = () => {
@@ -133,12 +166,25 @@ const Header = ({ searchParams }) => {
 
           {/* The nav element is used to render the navigation menu. */}
           <nav id="nav-menu">
-            {/* The NavLink component is used to create a link to the home route. */}
-            <NavLink to="/">Home</NavLink>
-            {/* The NavLink component is used to create a link to the order review route. */}
-            <NavLink to="/order/review">Order Review</NavLink>
-            {/* The NavLink component is used to create a link to the inventory route. */}
-            <NavLink to="/inventory">Manage Inventory</NavLink>
+            {/* NavLink for the Home page */}
+            <NavLink to="/" onClick={() => handleNavigation("/")}>
+              Home
+            </NavLink>
+            {/* NavLink for the Order Review page */}
+            <NavLink
+              to="/order/review"
+              onClick={() => handleNavigation("/order/review")}
+            >
+              Order Review
+            </NavLink>
+            {/* NavLink for the Manage Inventory page */}
+            <NavLink
+              to="/inventory"
+              onClick={() => handleNavigation("/inventory")}
+            >
+              Manage Inventory
+            </NavLink>
+
             <FontAwesomeIcon
               icon={faXmark}
               className="icon close-icon"
@@ -188,9 +234,6 @@ const Header = ({ searchParams }) => {
           </Link>
         </div>
       </div>
-
-      {/* Dimmed Overlay BG */}
-      <div id="dimmed-bg"></div>
     </header>
   );
 };

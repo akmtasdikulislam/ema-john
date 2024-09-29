@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import the 
 import { AppDataContext } from "../../App"; // Import the AppDataContext and BACKEND_URL from the App component
 
 // Utility functions for data formatting and generation
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { calculateCart } from "../../functions/calculateCart";
 import { showToast } from "../../functions/showToast"; // Import the showToast function to display notifications to the user
 
@@ -62,6 +63,27 @@ const Cart = () => {
       }
     }
   };
+  const handleCloseButton = () => {
+    /*
+    This function handles the closing of the cart modal by hiding the cart and dimmed background,
+    and resetting the body overflow and max height.
+
+    Task List:
+    • Get the cart element
+    • Get the dimmed background element
+    • Hide the cart
+    • Hide the dimmed background
+    • Reset body overflow
+    • Reset body max height
+    */
+
+    const cart = document.getElementsByClassName("cart")[0]; // Get the first element with class "cart"
+    const dimmedBG = document.getElementById("dimmed-bg"); // Get the element with id "dimmed-bg"
+    cart.style.display = "none"; // Hide the cart element
+    dimmedBG.style.display = "none"; // Hide the dimmed background
+    document.body.style.overflowY = "auto"; // Reset the vertical overflow of the body to auto
+    document.body.style.maxHeight = ""; // Remove any max height restriction on the body
+  };
 
   return (
     <aside className="cart">
@@ -69,6 +91,11 @@ const Cart = () => {
         <FontAwesomeIcon className="icon" icon={faShoppingCart} />
         Cart Summary
       </h5>
+      <FontAwesomeIcon
+        icon={faXmark}
+        className="close-icon"
+        onClick={handleCloseButton}
+      />
       <table>
         <tbody>
           <tr>

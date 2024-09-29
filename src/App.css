@@ -459,6 +459,10 @@ aside.cart {
     width     : 100%;
 }
 
+.cart .close-icon {
+    display: none;
+}
+
 /* PRODUCT DETAILS Component */
 #product-details>.loader-container {
     width          : 100%;
@@ -1583,8 +1587,63 @@ fieldset.error select {
     }
 }
 
+/* CartChip Component */
+.cart-chip {
+    align-items     : center;
+    background-color: var(--carrot-orange);
+    border-radius   : .5em;
+    bottom          : 3em;
+    color           : white;
+    display         : none;
+    gap             : .5em;
+    padding         : .5em 1em;
+    position        : fixed;
+    right           : 3em;
+    width           : max-content;
+    z-index         : 99;
+}
+
+.cart-chip:hover {
+    cursor    : pointer;
+    filter    : brightness(93%);
+    transition: all ease-in-out .3s;
+}
+
+.cart-chip span {
+    align-items     : center;
+    background-color: white;
+    border-radius   : .5em;
+    color           : var(--dark-jungle-green);
+    display         : flex;
+    font-weight     : 600;
+    height          : 1.25em;
+    justify-content : center;
+    margin          : 0;
+    min-width       : fit-content;
+    padding         : 0 .5em;
+    width           : auto;
+}
+
+
+#dimmed-bg {
+    background-color: rgba(0, 0, 0, 0.5);
+    display         : none;
+    height          : 100%;
+    left            : 50%;
+    position        : fixed;
+    top             : 50%;
+    transform       : translate(-50%, -50%);
+    width           : 100%;
+    z-index         : 1;
+}
+
+
 /* Responsiveness */
 @media only screen and (max-width: 1024px) {
+    .container {
+        width: 90%;
+    }
+
     header .logo {
         margin-left : auto;
         margin-right: auto;
@@ -1634,14 +1693,38 @@ fieldset.error select {
         transition: all ease-in-out .3s;
     }
 
-    header #dimmed-bg {
-        background-color: rgba(0, 0, 0, 0.5);
-        display         : none;
-        height          : 100%;
-        left            : 0;
-        position        : absolute;
-        top             : 0;
-        width           : 100%;
-        z-index         : 1;
+    #home>.col-3,
+    #order-review>.col-3 {
+        display: none;
+    }
+
+    .cart-chip {
+        display: flex;
+    }
+
+    .cart {
+        border-radius: .5em;
+        display      : none;
+        left         : 50%;
+        position     : fixed;
+        top          : 50%;
+        transform    : translate(-50%, -50%);
+        width        : 20em;
+        z-index      : 99;
+    }
+
+    .cart .close-icon {
+        display  : block;
+        font-size: 1.25em;
+        font-size: 1em;
+        position : absolute;
+        right    : 1.25em;
+        top      : 1.25em;
+    }
+
+    .cart .close-icon:hover {
+        color     : var(--carrot-orange);
+        cursor    : pointer;
+        transition: all ease-in-out .3s;
     }
 }

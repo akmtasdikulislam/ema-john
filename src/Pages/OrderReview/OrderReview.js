@@ -10,6 +10,7 @@ import { AppDataContext } from "../../App"; // Import AppDataContext to access c
 
 /** Component imports **/
 import Cart from "../../components/Cart/Cart"; // Import Cart component to display cart summary
+import CartChip from "../../components/CartChip/CartChip";
 import Header from "../../components/Header/Header"; // Import Header component for page header
 import NotFoundErrorMessage from "../../components/NotFoundErrorMessage/NotFoundErrorMessage"; // Import NotFoundErrorMessage component for empty cart message
 import Product from "../../components/Product/Product"; // Import Product component to display individual cart items
@@ -23,7 +24,7 @@ const OrderReview = () => {
       <div className="container">
         <h1>Review Your Cart Before Checkout</h1>
         <div className="row">
-          <div className="col-9">
+          <div className="col-xl-9 col-12">
             {/* Check if the cart has any items */}
             {cart.length > 0 ? (
               // If cart is not empty, map through each product
@@ -50,6 +51,7 @@ const OrderReview = () => {
             <Cart />
           </div>
         </div>
+        <CartChip />
       </div>
     </main>
   );

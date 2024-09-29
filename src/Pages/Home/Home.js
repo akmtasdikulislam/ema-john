@@ -19,6 +19,7 @@ import Product from "../../components/Product/Product"; // Import the Product co
 // ** Context imports **
 
 import { AppDataContext } from "../../App"; // Import the AppDataContext to access global application state
+import CartChip from "../../components/CartChip/CartChip";
 
 // Component for the Home page
 // Props:
@@ -110,7 +111,7 @@ const Home = ({ failedToFetch, fetchAllProducts }) => {
           ) : // If fetching was successful, proceed to render products or loading indicator
           isProductsLoaded ? (
             // If products have been loaded successfully, display them
-            <div className="col-9">
+            <div className="col-xl-9 col-12">
               {/* Map through the products of the current page and render each one */}
               {currentPageProducts.map((product) => (
                 <Product
@@ -122,7 +123,7 @@ const Home = ({ failedToFetch, fetchAllProducts }) => {
             </div>
           ) : (
             // If products are still loading, display a loading indicator
-            <div className="col-9 loader-container">
+            <div className="col-xl-9 col-12 loader-container">
               <Loader />{" "}
               {/* Custom Loader component to show loading animation */}
               <p>
@@ -135,6 +136,7 @@ const Home = ({ failedToFetch, fetchAllProducts }) => {
             <Cart />
           </div>
         </div>
+        <CartChip />
         {/* Pagination section - This portion handles the display and functionality of pagination controls */}
         {/* Only render pagination if products are loaded */}
         {isProductsLoaded && (

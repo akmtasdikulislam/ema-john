@@ -351,6 +351,9 @@ function App() {
             />
           ))}
         </div>
+
+        {/* Dimmed Overlay BG */}
+        <div id="dimmed-bg"></div>
       </div>
     </AppDataContext.Provider>
   );
