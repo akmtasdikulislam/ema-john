@@ -111,7 +111,7 @@ const Home = ({ failedToFetch, fetchAllProducts }) => {
           ) : // If fetching was successful, proceed to render products or loading indicator
           isProductsLoaded ? (
             // If products have been loaded successfully, display them
-            <div className="col-xl-9 col-12">
+            <div className="col-xl-9 col-md-12 products-container">
               {/* Map through the products of the current page and render each one */}
               {currentPageProducts.map((product) => (
                 <Product

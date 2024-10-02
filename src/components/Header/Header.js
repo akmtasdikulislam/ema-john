@@ -229,7 +229,7 @@ const Header = ({ searchParams }) => {
           />
           <Link to={`/search?q=${searchQuery}`}>
             <button type="submit">
-              <FontAwesomeIcon icon={faSearch} /> Search
+              <FontAwesomeIcon icon={faSearch} /> <span>Search</span>
             </button>
           </Link>
         </div>

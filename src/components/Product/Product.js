@@ -93,7 +93,9 @@ const Product = ({ productDetails, parent }) => {
                       // NOTE: We're distinguishing between "filled" and "empty" stars by using CSS depending on their class names.
                     )}
                   </span>{" "}
-                  {parseInt(star)}/5 ({starCount} reviewed)
+                  <span className="rating-count">
+                    {parseInt(star)}/5 ({starCount} reviewed)
+                  </span>
                 </p>
               </td>
             </tr>
