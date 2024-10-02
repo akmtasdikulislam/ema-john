@@ -61,6 +61,31 @@ const ProductDetails = () => {
   // State to handle fetch failures
   const [failedToFetch, setFailedToFetch] = useState(false);
 
+  // Extract the productKey from the URL parameters
+  const { productKey } = useParams();
+
+  // Destructure properties from the product object, or use an empty object if product is undefined
+  const {
+    key,
+    name,
+    img,
+    price,
+    priceFraction,
+    star,
+    starCount,
+    seller,
+    stock,
+    shipping,
+    features,
+  } = product || {};
+
+  // Initialize the navigate function for programmatic navigation
+  const navigate = useNavigate();
+
+  // Access global state and functions from AppDataContext
+  const { cart, setCart, products, isProductsLoaded } =
+    useContext(AppDataContext);
+
   // Effect hook to handle product loading and navigation
   useEffect(() => {
     // Check if products have been loaded
@@ -102,31 +127,6 @@ const ProductDetails = () => {
   //====================//
   //  HELPER FUNCTIONS  //
   //====================//
-
-  // Extract the productKey from the URL parameters
-  const { productKey } = useParams();
-
-  // Destructure properties from the product object, or use an empty object if product is undefined
-  const {
-    key,
-    name,
-    img,
-    price,
-    priceFraction,
-    star,
-    starCount,
-    seller,
-    stock,
-    shipping,
-    features,
-  } = product || {};
-
-  // Initialize the navigate function for programmatic navigation
-  const navigate = useNavigate();
-
-  // Access global state and functions from AppDataContext
-  const { cart, setCart, products, isProductsLoaded } =
-    useContext(AppDataContext);
 
   // Set the document title to include the product name for better SEO and user experience
   document.title = `${name} | Ema John`;
