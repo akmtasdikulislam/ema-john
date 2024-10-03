@@ -43,7 +43,7 @@ const CustomerReview = ({ review }) => {
                   )
                 // NOTE: We're distinguishing between "filled" and "empty" stars by using CSS depending on their class names.
               )}
-              <span className="ms-3">{rating}/5</span>
+              <span className="rating-count ms-3">{rating}/5</span>
             </p>
             <p className="date">{formatDate(reviewDate)}</p>
           </div>

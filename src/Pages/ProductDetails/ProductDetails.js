@@ -258,7 +258,7 @@ const ProductDetails = () => {
                 {starCount || 0} reviewed)
               </p>
               <p className="name">{name}</p>
-              <div className="d-flex flex-row align-items-center justify-content-between">
+              <div className="seller-stock  justify-content-between">
                 <p>Seller: {seller}</p>
                 {stock < 10 ? (
                   <p>
@@ -266,11 +266,11 @@ const ProductDetails = () => {
                     are available
                   </p>
                 ) : (
-                  <p className="ms-5">Stock: {stock} items are available</p>
+                  <p className="stock">Stock: {stock} items are available</p>
                 )}
               </div>
               <div className="d-flex flex-row align-items-center  justify-content-between">
-                <div className="d-flex flex-row align-items-center">
+                <div className="quantity-addToCart justify-content-between">
                   <div className="quantity d-flex flex-row align-items-center">
                     <button
                       onClick={() => {
@@ -311,7 +311,7 @@ const ProductDetails = () => {
                         currentCart: cart,
                       });
                     }}
-                    className="ms-3"
+                    className="addToCart"
                   >
                     <FontAwesomeIcon icon={faShoppingCart} />{" "}
                     {productExistsInCart ? "Add more to cart" : "Add to cart"}

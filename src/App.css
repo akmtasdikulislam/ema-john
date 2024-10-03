@@ -533,6 +533,14 @@ aside.cart {
     margin-right: .475em;
 }
 
+#product-details .seller-stock,
+#product-details .quantity-addToCart {
+    align-items   : center;
+    display       : flex;
+    flex-direction: row;
+    width         : 100%;
+}
+
 .quantity {
     border: 1px solid var(--iceberg-blue);
     height: 2.5em;
@@ -1730,6 +1738,13 @@ fieldset.error select {
         transition: all ease-in-out .3s;
     }
 
+    #product-details .shipping {
+        display: none;
+    }
+
+    #product-details .product {
+        width: 100%;
+    }
 }
 
 /* Tablet */
@@ -1808,10 +1823,32 @@ fieldset.error select {
         row-gap      : .75em;
         width        : 100%;
     }
+
+    #product-details .product .col-6 {
+        width: 100%;
+    }
+
+    #product-details .quantity-addToCart {
+        gap: 2em;
+    }
+
+    #product-details .services {
+        display              : grid;
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+
+    #product-details .services>* {
+        width: 100%;
+    }
 }
 
 /* Mobile */
 @media only screen and (max-width: 425px) {
+    .container {
+        width: 95%;
+    }
+
     header nav {
         width: 20em;
     }
@@ -1847,4 +1884,43 @@ fieldset.error select {
         bottom: 2em;
         right : 2em;
     }
+
+    #product-details .product .we-accept,
+    #product-details .product .card-group {
+        flex-wrap      : wrap;
+        justify-content: center;
+    }
+}
+
+/* Mobile (Small) */
+@media only screen and (max-width: 320px) {
+
+    #product-details .product .col-6:nth-child(1) {
+        width: 100%;
+    }
+
+    #product-details .product .col-6:nth-child(1) img {
+        padding: 0;
+        width  : 100%;
+    }
+
+    #product-details .product .seller-stock,
+    #product-details .product .quantity-addToCart {
+        align-items   : start;
+        flex-direction: column;
+    }
+
+    #product-details .product .stock,
+    #product-details .product .addToCart {
+        margin-left: 0;
+    }
+
+    .customer-review .col {
+        flex-direction: column;
+    }
+
+    .customer-review .col .rating-count {
+        display: none;
+    }
+
 }
