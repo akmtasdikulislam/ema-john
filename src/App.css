@@ -1006,6 +1006,10 @@ form select:focus-within+label {
     height: 2.75em;
 }
 
+#inventory header .search-bar input {
+    height: 2.68375em;
+}
+
 #inventory fieldset {
     margin-bottom: 1.5em;
 }
@@ -1022,6 +1026,14 @@ form select:focus-within+label {
 #feature-container {
     display       : flex;
     flex-direction: column;
+}
+
+.other-product-input-column {
+    padding-right: 1.5em;
+}
+
+.product-feature-input-column {
+    padding-left: 1.5em;
 }
 
 .feature {
@@ -1152,7 +1164,10 @@ h3 {
 
 
 #inventory .product-name-image p {
-    margin: 0;
+    margin       : 0;
+    max-height   : 3em;
+    overflow     : hidden;
+    text-overflow: ellipsis
 }
 
 /* All the Product Price will be left aligned to show them in a straight line from top to bottom */
@@ -1745,6 +1760,32 @@ fieldset.error select {
     #product-details .product {
         width: 100%;
     }
+
+    #inventory form.row {
+        display       : flex;
+        flex-direction: column;
+    }
+
+    #inventory form.row>.col-6 {
+        padding: 0;
+        width  : 100%;
+    }
+
+    #inventory .table-container {
+        border  : 2.5px solid var(--iceberg-blue);
+        overflow: scroll;
+        width   : 100%;
+    }
+
+    #inventory table thead tr,
+    #inventory table tbody tr {
+        border-left : 0;
+        border-right: 0;
+    }
+
+    #inventory table tbody tr:last-child {
+        border-bottom: 0;
+    }
 }
 
 /* Tablet */
@@ -1828,6 +1869,15 @@ fieldset.error select {
         width: 100%;
     }
 
+    #product-details .product .col-6:nth-child(1) {
+        width: 100%;
+    }
+
+    #product-details .product .col-6:nth-child(1) img {
+        padding: 0;
+        width  : 100%;
+    }
+
     #product-details .quantity-addToCart {
         gap: 2em;
     }
@@ -1840,6 +1890,10 @@ fieldset.error select {
 
     #product-details .services>* {
         width: 100%;
+    }
+
+    .not-found-error-message p {
+        text-align: center;
     }
 }
 
@@ -1890,19 +1944,35 @@ fieldset.error select {
         flex-wrap      : wrap;
         justify-content: center;
     }
+
+    .confirm-delete-modal {
+        width  : 90vw;
+        padding: 1em;
+    }
+
+    .confirm-delete-modal p {
+        width     : 100%;
+        text-align: center;
+    }
+
+    #inventory header .search-bar input {
+        height: auto;
+    }
+
+    .productPrice-shippingCost-row,
+    .productStock-productRating-row {
+        display       : flex;
+        flex-direction: column;
+    }
+
+    .productPrice-shippingCost-row .col-6,
+    .productStock-productRating-row .col-6 {
+        width: 100%;
+    }
 }
 
 /* Mobile (Small) */
 @media only screen and (max-width: 320px) {
-
-    #product-details .product .col-6:nth-child(1) {
-        width: 100%;
-    }
-
-    #product-details .product .col-6:nth-child(1) img {
-        padding: 0;
-        width  : 100%;
-    }
 
     #product-details .product .seller-stock,
     #product-details .product .quantity-addToCart {

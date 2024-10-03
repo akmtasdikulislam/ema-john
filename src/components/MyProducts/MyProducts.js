@@ -103,29 +103,31 @@ const MyProducts = ({ setFeatures, setProduct, setUpdateProduct }) => {
           myProducts.length > 0 ? (
             // 2. If products are fetched successfully and there are products:
             // Render a table with product details
-            <table>
-              <thead>
-                <tr>
-                  <th>Product</th>
-                  <th>Price</th>
-                  <th>Rating</th>
-                  <th>Stock</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {/* Map through products and render a row for each */}
-                {myProducts.map((item, index) => (
-                  <ProductRecordRow
-                    key={index}
-                    productDetails={item}
-                    setFeatures={setFeatures}
-                    setProduct={setProduct}
-                    setUpdateProduct={setUpdateProduct}
-                  />
-                ))}
-              </tbody>
-            </table>
+            <div className="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th className="price-column">Price</th>
+                    <th className="rating-column">Rating</th>
+                    <th className="stock-column">Stock</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {/* Map through products and render a row for each */}
+                  {myProducts.map((item, index) => (
+                    <ProductRecordRow
+                      key={index}
+                      productDetails={item}
+                      setFeatures={setFeatures}
+                      setProduct={setProduct}
+                      setUpdateProduct={setUpdateProduct}
+                    />
+                  ))}
+                </tbody>
+              </table>
+            </div>
           ) : (
             // If there are no products:
             // Display a message indicating no products have been added yet

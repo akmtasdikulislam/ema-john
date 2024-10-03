@@ -104,29 +104,31 @@ const MyOrders = () => {
           // If orders are fetched successfully, check if there are any orders
           myOrders.length > 0 ? (
             // If there are orders, render a table with order details
-            <table>
-              <thead>
-                <tr>
-                  {/* Table headers for different order attributes */}
-                  <th>Product</th>
-                  <th>Order No</th>
-                  <th>Quantity</th>
-                  <th>Order Placed on</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {/* Map through the orders array and render each order as a row */}
-                {myOrders.map((order, index) => (
-                  <OrderRecordRow
-                    key={index}
-                    product={order}
-                    myOrders={myOrders}
-                    setMyOrders={setMyOrders}
-                  />
-                ))}
-              </tbody>
-            </table>
+            <div className="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    {/* Table headers for different order attributes */}
+                    <th>Product</th>
+                    <th className="orderID-column">Order No</th>
+                    <th className="quantity-column">Quantity</th>
+                    <th className="orderDate-column">Order Placed on</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {/* Map through the orders array and render each order as a row */}
+                  {myOrders.map((order, index) => (
+                    <OrderRecordRow
+                      key={index}
+                      product={order}
+                      myOrders={myOrders}
+                      setMyOrders={setMyOrders}
+                    />
+                  ))}
+                </tbody>
+              </table>
+            </div>
           ) : (
             // If there are no orders, display a message indicating no orders have been placed yet
             <NotFoundErrorMessage

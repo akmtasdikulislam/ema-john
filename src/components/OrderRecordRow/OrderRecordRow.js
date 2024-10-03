@@ -57,10 +57,9 @@ import { showToast } from "../../functions/showToast"; // Function to display to
 const OrderRecordRow = ({ product, myOrders, setMyOrders }) => {
   // Destructure toasts and setToasts from AppDataContext to manage toast notifications
   const { toasts, setToasts } = useContext(AppDataContext);
-  
+
   // Extract product details from the product prop for easy access in the component
   const { img, name, orderDate, orderID, quantity } = product;
-
 
   const deleteOrder = async (orderID) => {
     /*
@@ -121,9 +120,9 @@ const OrderRecordRow = ({ product, myOrders, setMyOrders }) => {
           <p>{name}</p>
         </div>
       </td>
-      <td className="order-id">#{orderID}</td>
-      <td>{formatNumber(quantity)}</td>
-      <td className="order-date">{orderDate}</td>
+      <td className="order-id orderID-column">#{orderID}</td>
+      <td className=" quantity-column">{formatNumber(quantity)}</td>
+      <td className="order-date orderDate-column">{orderDate}</td>
       <td>
         <div className="actions">
           {/* Button to mark the order as completed */}

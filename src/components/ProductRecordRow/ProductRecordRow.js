@@ -104,11 +104,11 @@ const ProductRecordRow = ({
         </div>
       </td>
       {/* Display product price */}
-      <td className="price">$ {price}</td>
+      <td className="price price-column">$ {price}</td>
       {/* Display product rating */}
-      <td>{star} / 5</td>
+      <td className="rating-column">{star} / 5</td>
       {/* Display product stock */}
-      <td>{stock}</td>
+      <td className="stock-column">{stock}</td>
       <td>
         <div className="actions">
           {/* Edit Product Button */}

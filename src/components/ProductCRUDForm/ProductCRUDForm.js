@@ -463,7 +463,7 @@ const ProductCRUDForm = ({
       {/* Add/Update Product Form */}
       <form className="row">
         {/* Other Product Input Field Column */}
-        <div className="col-6 pe-4">
+        <div className="col-6 other-product-input-column">
           {/* Product Name */}
           <fieldset>
             <input
@@ -504,7 +504,7 @@ const ProductCRUDForm = ({
             <label htmlFor="product-photo-url">Product Photo Url</label>
           </fieldset>
           {/* New Row for showing Product Price and Product Shipping Cost together */}
-          <div className="row">
+          <div className="row productPrice-shippingCost-row">
             <div className="col-6">
               {/* Product Price */}
               <fieldset>
@@ -539,7 +539,7 @@ const ProductCRUDForm = ({
             </div>
           </div>
           {/* New Row for showing Product Stock and Product Rating together */}
-          <div className="row">
+          <div className="row productStock-productRating-row">
             <div className="col-6">
               {/* Product Stock */}
               <fieldset>
@@ -578,7 +578,7 @@ const ProductCRUDForm = ({
         </div>
 
         {/* Product Feature Input Field Column */}
-        <div className="col-6 ps-4">
+        <div className="col-6 product-feature-input-column">
           <div className="d-flex flex-row align-items-center justify-content-between w-100 product-feature">
             <h5>Product Features</h5>
             {/* Add New Feature Button (on click add a new input field to add a new feature) */}
