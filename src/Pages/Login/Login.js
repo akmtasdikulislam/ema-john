@@ -29,6 +29,7 @@ import {
 
 /** Asset imports **/
 import loginBG from "../../assets/images/login-bg.jpg"; // Background image for the login page
+import logoAlt from "../../assets/images/logo-inverted.png"; // Logo image (white) for the login page
 import logo from "../../assets/images/logo.png"; // Logo image for the login page
 
 /** Utility function imports **/
@@ -199,7 +200,8 @@ const Login = () => {
         </Link>
         <div className="form-container">
           <Link to="/">
-            <img src={logo} alt="Ema John" className="logo" />
+            <img src={logo} alt="Login background" className="logo logo-normal" />
+            <img src={logoAlt} alt="Login background" className="logo logo-inverted" />
           </Link>
 
           <h3>Login</h3>

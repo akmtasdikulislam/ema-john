@@ -734,7 +734,8 @@ input[type=number]::-webkit-outer-spin-button {
     width  : 100%;
 }
 
-#login #error-message {
+#login #error-message,
+#sign-up #error-message {
     width: 100%;
 }
 
@@ -797,6 +798,10 @@ input[type=number]::-webkit-outer-spin-button {
     margin-bottom: 2.5em;
     transform    : translateX(50%);
     width        : 12em;
+}
+
+#login #form-column .logo-inverted {
+    display: none;
 }
 
 .form-container form {
@@ -1895,6 +1900,84 @@ fieldset.error select {
     .not-found-error-message p {
         text-align: center;
     }
+
+    #login,
+    #sign-up {
+        overflow: hidden;
+    }
+
+    #photo-column {
+        position: relative;
+        width   : 100%;
+        z-index : 0;
+    }
+
+    #photo-column::after {
+        background-color: black;
+        content         : "";
+        height          : 100%;
+        left            : 0;
+        opacity         : 0.5;
+        position        : absolute;
+        top             : 0;
+        width           : 100%;
+        z-index         : 1;
+    }
+
+    #form-column {
+        left     : 50%;
+        position : absolute;
+        top      : 50%;
+        transform: translate(-50%, -50%);
+        width    : 100%;
+        z-index  : 9;
+    }
+
+    #form-column * {
+        z-index: 9;
+    }
+
+    #form-column .logo-normal {
+        display: none;
+    }
+
+    #form-column .logo-inverted {
+        display: block !important;
+    }
+
+    #form-column p,
+    #form-column h3,
+    #form-column label {
+        color      : white;
+        font-weight: 600;
+    }
+
+    #form-column a {
+        color      : hsl(196, 98%, 70%);
+        font-weight: 600;
+    }
+
+    #form-column .back {
+        color: white !important;
+        right: 4em;
+        top  : -1em;
+    }
+
+    .additional-form-items fieldset #remember-me~.icon {
+        color: white;
+    }
+
+    #error-message p {
+        color: var(--error-color) !important;
+    }
+
+    #email-error-message {
+        background-color: var(--error-color-light);
+        border-radius   : .25em;
+        color           : var(--error-color) !important;
+        padding         : .5em 1em;
+        width           : 100%;
+    }
 }
 
 /* Mobile */
@@ -1969,6 +2052,27 @@ fieldset.error select {
     .productStock-productRating-row .col-6 {
         width: 100%;
     }
+
+    #form-column {
+        margin-left : auto;
+        margin-right: auto;
+        width       : 90%;
+    }
+
+    #form-column .back {
+        right: 2em;
+        top  : -2em;
+    }
+
+    .form-container {
+        width: 100%;
+    }
+
+    .form-container .logo {
+        margin-left : auto;
+        margin-right: auto;
+        transform   : initial;
+    }
 }
 
 /* Mobile (Small) */
@@ -1991,6 +2095,10 @@ fieldset.error select {
 
     .customer-review .col .rating-count {
         display: none;
+    }
+
+    #form-column {
+        width: 95%;
     }
 
 }

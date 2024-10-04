@@ -7,24 +7,29 @@ import { AppDataContext } from "../../App"; // Import context for global app dat
 
 /** Firebase related imports **/
 import {
-    createUserWithEmailAndPassword,
-    getAuth,
-    sendEmailVerification,
-    updateProfile,
+  createUserWithEmailAndPassword,
+  getAuth,
+  sendEmailVerification,
+  updateProfile,
 } from "firebase/auth"; // Import Firebase authentication functions
 
 /** UI Component imports **/
-import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons"; // Import specific icon for back navigation
+import {
+  faArrowLeftLong,
+  faCircleExclamation,
+} from "@fortawesome/free-solid-svg-icons"; // Import specific icon for back navigation
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import FontAwesome component for icons
 import ContinueWithGoogleButton from "../../components/ContinueWithGoogleButton/ContinueWithGoogleButton"; // Import Google sign-in button component
 import Loader from "../../components/Loader/Loader"; // Import loading indicator component
 
 /** Asset imports **/
+import logoAlt from "../../assets/images/logo-inverted.png"; // Import logo image for branding
 import logo from "../../assets/images/logo.png"; // Import logo image for branding
 import signupBG from "../../assets/images/signup-bg.jpg"; // Import background image for signup page
 
 /** Utility imports **/
 import { showToast } from "../../functions/showToast"; // Import toast notification function
+import { validateForm } from "../../functions/validateForm";
 
 // Define a functional component named SignUp
 const SignUp = () => {
@@ -88,39 +93,41 @@ const SignUp = () => {
     // • Show a toast notification with a success message.
 
     // Set the isSubmitted state to true.
-    setIsSubmitted(true);
+    if (validateForm()) {
+      setIsSubmitted(true);
+      // Create a new user with the email and password.
+      createUserWithEmailAndPassword(auth, newUser.email, newUser.password)
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
 
-    // Create a new user with the email and password.
-    createUserWithEmailAndPassword(auth, newUser.email, newUser.password)
-      .then((userCredential) => {
-        // Signed up
-        const user = userCredential.user;
-
-        // Update user profile with displayName and photoURL
-        return updateProfile(user, {
-          displayName: newUser.name,
-          photoURL: newUser.photoURL,
-        }).then(() => {
-          // Send email verification
-          return sendEmailVerification(user).then(() => {
-            // Show a toast notification with a success message.
-            showToast(
-              toasts,
-              setToasts,
-              "success",
-              "Welcome & Verify Your Email!",
-              "Your account has been created, and a verification email has been sent. Please check your inbox to verify your email address.",
-              7000
-            );
+          // Update user profile with displayName and photoURL
+          return updateProfile(user, {
+            displayName: newUser.name,
+            photoURL: newUser.photoURL,
+          }).then(() => {
+            // Send email verification
+            return sendEmailVerification(user).then(() => {
+              // Show a toast notification with a success message.
+              showToast(
+                toasts,
+                setToasts,
+                "success",
+                "Welcome & Verify Your Email!",
+                "Your account has been created, and a verification email has been sent. Please check your inbox to verify your email address.",
+                7000
+              );
+            });
           });
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // Show a toast notification with an error message.
+          showToast(toasts, setToasts, "error", errorCode, errorMessage);
+          setIsSubmitted(false);
         });
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // Show a toast notification with an error message.
-        showToast(toasts, setToasts, "error", errorCode, errorMessage);
-      });
+    }
   };
 
   return (
@@ -134,7 +141,16 @@ const SignUp = () => {
         </Link>
         <div className="form-container">
           <Link to="/">
-            <img src={logo} alt="Ema John" className="logo" />
+            <img
+              src={logo}
+              alt="Login background"
+              className="logo logo-normal"
+            />
+            <img
+              src={logoAlt}
+              alt="Login background"
+              className="logo logo-inverted"
+            />
           </Link>
 
           <h3>Sign up</h3>
@@ -177,6 +193,10 @@ const SignUp = () => {
               <label htmlFor="password">Password</label>
             </fieldset>
           </form>
+          <div className="message" id="error-message">
+            <FontAwesomeIcon className="icon" icon={faCircleExclamation} />
+            <p>Please fill in all required fields before submitting.</p>
+          </div>
           {
             // Check if isSubmitted is true
             isSubmitted ? (
