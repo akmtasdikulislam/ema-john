@@ -59,7 +59,7 @@ export const AppDataContext = createContext();
 
 // Define the base URL for the backend API
 // This constant is used throughout the application to make HTTP requests to the server
-export const BACKEND_URL = "http://localhost:5000";
+export const BACKEND_URL = "https://ema-john-server-35n2.onrender.com";
 
 // Define the App component, which is the top-level component in the app.
 function App() {
