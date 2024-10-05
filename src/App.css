@@ -800,7 +800,7 @@ input[type=number]::-webkit-outer-spin-button {
     width        : 12em;
 }
 
-#login #form-column .logo-inverted {
+#form-column .logo-inverted {
     display: none;
 }
 
@@ -1687,6 +1687,7 @@ fieldset.error select {
         height          : 100vh;
         justify-content : start;
         left            : -25em;
+        overflow-y      : auto;
         padding-left    : 3em;
         padding-top     : 7.5em;
         position        : absolute;
@@ -1854,13 +1855,20 @@ fieldset.error select {
     }
 
     #home .products-container {
+        container-name : products-container;
+        container-type : inline-size;
         display        : flex;
         flex-direction : row;
         flex-wrap      : wrap;
         gap            : 1em;
         justify-content: space-between;
         width          : 100%;
+    }
 
+    @container products-container (max-width:540px) {
+        .product {
+            width: 100%;
+        }
     }
 
     .pagination-container {
@@ -1903,7 +1911,9 @@ fieldset.error select {
 
     #login,
     #sign-up {
-        overflow: hidden;
+        height    : 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
     }
 
     #photo-column {
@@ -2060,8 +2070,9 @@ fieldset.error select {
     }
 
     #form-column .back {
-        right: 2em;
-        top  : -2em;
+        position: fixed;
+        right   : 2em;
+        top     : -2em;
     }
 
     .form-container {
